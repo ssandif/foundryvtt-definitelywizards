@@ -1,47 +1,10 @@
 import fs from "node:fs";
-import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ClassicLevel } from "classic-level";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
-
-/**
- * Resolve the Foundry VTT installation path from CLI args, FOUNDRY_APP_DIR, or the local default.
- * @param {string[]} argv
- * @returns {string}
- */
-function resolveFoundryDir(argv) {
-    for (let i = 0; i < argv.length; i++) {
-        const arg = argv[i];
-        if (arg === "--foundry-dir") {
-            const value = argv[i + 1];
-            if (!value || value.startsWith("--")) {
-                throw new Error("Missing path after --foundry-dir.");
-            }
-            return value;
-        }
-        if (arg.startsWith("--foundry-dir=")) {
-            const value = arg.slice("--foundry-dir=".length);
-            if (!value) {
-                throw new Error("Missing path after --foundry-dir=.");
-            }
-            return value;
-        }
-    }
-    return process.env.FOUNDRY_APP_DIR || "/home/sheas/.local/share/foundryvtt-app";
-}
-
-const foundryDirInput = path.resolve(resolveFoundryDir(process.argv.slice(2)));
-const foundryPackagePath =
-    path.basename(foundryDirInput) === "package.json"
-        ? foundryDirInput
-        : path.join(foundryDirInput, "package.json");
-if (!fs.existsSync(foundryPackagePath)) {
-    throw new Error(
-        `Foundry VTT installation not found at ${foundryPackagePath}; set FOUNDRY_APP_DIR or pass --foundry-dir <path> to load classic-level.`,
-    );
-}
 
 const systemManifest = JSON.parse(fs.readFileSync(path.join(rootDir, "system.json"), "utf8"));
 const systemId = systemManifest.id;
@@ -50,9 +13,6 @@ const coreVersion = systemManifest.compatibility?.verified;
 if (!systemId || !systemVersion || !coreVersion) {
     throw new Error("system.json must define id, version, and compatibility.verified.");
 }
-
-const require = createRequire(foundryPackagePath);
-const { ClassicLevel } = require("classic-level");
 
 const NOW = Date.now();
 const BASE_STATS = {
