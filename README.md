@@ -30,6 +30,10 @@ Requires **Node.js 24** (see `mise.toml`). Compiled LevelDB compendiums under `p
 - `npm run check` — run Biome checks (`npm run lint`), TypeScript `checkJs` typecheck (`npm run typecheck`), and Foundry v14 static & pack manifest verification (`npm run check:foundry`).
 - `npm run format` / `npm run lint:fix` — format or auto-fix files with Biome.
 
+## Credits & Assets
+
+See `credits.md` for system contributors and historical attributions. The v2.0.0 custom SVG icons under `resources/icons/` (excluding v1 controls `plus.svg`, `minus.svg`, `reset.svg`, and `die-six-double.svg`) and the setup banner (`resources/images/system-banner.jpg`) were created with AI assistance.
+
 ## That's it!
 
 This is a very simple system for a very simple (but awesome) game. Enjoy!
