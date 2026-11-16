@@ -77,7 +77,7 @@ jobs:
             LICENSE.txt \
             README.md \
             release-notes.txt \
-            -x "packs/_source/*"
+            -x "packs/_source*"
 
       - name: Create GitHub Release and upload assets
         env:

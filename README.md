@@ -23,12 +23,12 @@ Definitely Wizards is a rules-light TTRPG about pretending to be a wizard by Ell
 
 ## Development
 
-Requires **Node.js 24** (see `mise.toml`).
+Requires **Node.js 24** (see `mise.toml`). Compiled LevelDB compendiums under `packs/` are gitignored, so if you are running or serving directly from a git clone (`mise run serve`), run `npm install && npm run build:packs` first:
 
-- `npm install` — install dev dependencies (`@biomejs/biome`, `typescript`, `lefthook`).
+- `npm install` — install dev dependencies (`@biomejs/biome`, `@foundryvtt/foundryvtt-cli`, `classic-level`, `lefthook`, `typescript`).
+- `npm run build:packs` — build all 4 LevelDB compendiums (`GM Helpers` and `Player Macros` via `scripts/build-compendiums.mjs`, and `Props` and `Spells` from `packs/_source/` via `fvtt package pack`).
 - `npm run check` — run Biome checks (`npm run lint`), TypeScript `checkJs` typecheck (`npm run typecheck`), and Foundry v14 static & pack manifest verification (`npm run check:foundry`).
 - `npm run format` / `npm run lint:fix` — format or auto-fix files with Biome.
-- `npm run build:packs` — rebuild the `GM Helpers` and `Player Macros` LevelDB compendiums via `scripts/build-compendiums.mjs` (reads `FOUNDRY_APP_DIR` or `--foundry-dir <path>`, defaulting to `/home/sheas/.local/share/foundryvtt-app`).
 
 ## That's it!
 

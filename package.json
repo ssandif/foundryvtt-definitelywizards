@@ -24,6 +24,7 @@
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
     "@foundryvtt/foundryvtt-cli": "^3.0.5",
+    "classic-level": "^3.0.0",
     "lefthook": "^1.11.0",
     "typescript": "^5.8.0"
   },
