@@ -1,7 +1,7 @@
 {
-  "name": "MonsterFactoryCreature",
+  "name": "Monster Factory Creature",
   "sort": 100001,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
   "description": "Roll for a creature in The Monster Factory",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "mfcR1EyeballMon1",
       "name": "",
       "description": "<p>Eyeball monster</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "mfcR2Minotaur222",
       "name": "",
       "description": "<p>Minotaur</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "mfcR3TRex3333333",
       "name": "",
       "description": "<p>T-Rex</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "mfcR4ZombieHorde",
       "name": "",
       "description": "<p>Zombie horde</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "mfcR5GiantSlime5",
       "name": "",
       "description": "<p>Giant slime</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "mfcR6Lich6666666",
       "name": "",
       "description": "<p>Lich</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-monster-creature.svg",
       "documentUuid": null,
       "flags": {}
     }

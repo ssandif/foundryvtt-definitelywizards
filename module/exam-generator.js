@@ -1,6 +1,68 @@
 /**
+ * Canonical definitions for the Practical Exam and Monster Factory RollTables.
+ */
+export const EXAM_ROLL_TABLES = {
+    judge: {
+        name: "Judge",
+        legacyNames: [],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-judge.json",
+    },
+    roomType: {
+        name: "Room Type",
+        legacyNames: ["RoomType"],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-room-type.json",
+    },
+    mainObstacle: {
+        name: "Main Obstacle",
+        legacyNames: ["MainObstacle"],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-main-obstacle.json",
+    },
+    addedChallenge: {
+        name: "Added Challenge",
+        legacyNames: ["AddedChallenge"],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-added-challenge.json",
+    },
+    surprise: {
+        name: "Surprise",
+        legacyNames: [],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-surprise.json",
+    },
+    finalTest: {
+        name: "Final Test",
+        legacyNames: ["FinalTest"],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-final-test.json",
+    },
+    monsterCreature: {
+        name: "Monster Factory Creature",
+        legacyNames: ["MonsterFactoryCreature"],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-monster-factory-creature.json",
+    },
+    monsterTrait: {
+        name: "Monster Factory Trait",
+        legacyNames: ["MonsterFactoryTrait"],
+        url: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-monster-factory-trait.json",
+    },
+};
+
+/**
+ * Look up a world RollTable by its canonical name, falling back to legacy PascalCase names.
+ * @param {keyof typeof EXAM_ROLL_TABLES} tableKey
+ * @returns {RollTable | undefined}
+ */
+function resolveExamRollTable(tableKey) {
+    const spec = EXAM_ROLL_TABLES[tableKey];
+    const direct = game.tables.getName(spec.name);
+    if (direct) return direct;
+    for (const legacyName of spec.legacyNames) {
+        const legacy = game.tables.getName(legacyName);
+        if (legacy) return legacy;
+    }
+    return undefined;
+}
+
+/**
  * Draw formatted result strings from a world RollTable, optionally expanding roll-6 "roll again twice".
- * @param {string} tableName
+ * @param {keyof typeof EXAM_ROLL_TABLES} tableKey
  * @param {object} [options]
  * @param {boolean} [options.allowDouble=false]
  * @param {boolean} [options.rerollSixes=false]
@@ -8,14 +70,15 @@
  * @returns {Promise<string[]>}
  */
 async function drawTableTexts(
-    tableName,
+    tableKey,
     { allowDouble = false, rerollSixes = false, depth = 0 } = {},
 ) {
-    const table = game.tables.getName(tableName);
+    const spec = EXAM_ROLL_TABLES[tableKey];
+    const table = resolveExamRollTable(tableKey);
     if (!table) {
         return [
             `<em>${game.i18n.format("DW.ExamMissingRollTable", {
-                name: foundry.utils.escapeHTML(tableName),
+                name: foundry.utils.escapeHTML(spec.name),
             })}</em>`,
         ];
     }
@@ -23,12 +86,12 @@ async function drawTableTexts(
     const { roll, results } = await table.roll();
     const isRollAgainTwice = allowDouble && rerollSixes && roll.total === 6 && depth < 3;
     if (isRollAgainTwice) {
-        const first = await drawTableTexts(tableName, {
+        const first = await drawTableTexts(tableKey, {
             allowDouble: true,
             rerollSixes: true,
             depth: depth + 1,
         });
-        const second = await drawTableTexts(tableName, {
+        const second = await drawTableTexts(tableKey, {
             allowDouble: true,
             rerollSixes: true,
             depth: depth + 1,
@@ -94,7 +157,7 @@ export async function generatePracticalExam() {
     const includeBoss = Boolean(formValues.includeMonsterFactory);
     const output = formValues.output === "chat" ? "chat" : "journal";
 
-    const [judge] = await drawTableTexts("Judge");
+    const [judge] = await drawTableTexts("judge");
 
     const chamberSpecs = [
         {
@@ -128,8 +191,8 @@ export async function generatePracticalExam() {
     ];
 
     for (const chamber of chamberSpecs) {
-        const room = await drawTableTexts("RoomType");
-        const obstacle = await drawTableTexts("MainObstacle", { allowDouble: true, rerollSixes });
+        const room = await drawTableTexts("roomType");
+        const obstacle = await drawTableTexts("mainObstacle", { allowDouble: true, rerollSixes });
 
         const rows = [
             `<p><strong>${escapeHTML(game.i18n.localize("DW.ExamRoomTypeLabel"))}</strong> ${formatEntryList(room)}</p>`,
@@ -137,7 +200,7 @@ export async function generatePracticalExam() {
         ];
 
         if (chamber.added) {
-            const added = await drawTableTexts("AddedChallenge", {
+            const added = await drawTableTexts("addedChallenge", {
                 allowDouble: true,
                 rerollSixes,
             });
@@ -147,14 +210,14 @@ export async function generatePracticalExam() {
         }
 
         if (chamber.surprise) {
-            const surprise = await drawTableTexts("Surprise", { allowDouble: true, rerollSixes });
+            const surprise = await drawTableTexts("surprise", { allowDouble: true, rerollSixes });
             rows.push(
                 `<p><strong>${escapeHTML(game.i18n.localize("DW.ExamSurpriseLabel"))}</strong> ${formatEntryList(surprise)}</p>`,
             );
         }
 
         if (chamber.finalTest) {
-            const finalTest = await drawTableTexts("FinalTest", {
+            const finalTest = await drawTableTexts("finalTest", {
                 allowDouble: true,
                 rerollSixes,
             });
@@ -163,8 +226,8 @@ export async function generatePracticalExam() {
             );
 
             if (includeBoss) {
-                const [creature] = await drawTableTexts("MonsterFactoryCreature");
-                const [trait] = await drawTableTexts("MonsterFactoryTrait");
+                const [creature] = await drawTableTexts("monsterCreature");
+                const [trait] = await drawTableTexts("monsterTrait");
                 rows.push(
                     `<p><strong>${escapeHTML(game.i18n.localize("DW.ExamBossLabel"))}</strong> ${trait} ${creature}</p>`,
                 );

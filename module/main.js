@@ -6,7 +6,7 @@ import {
     DEFINITELY_WIZARDS,
     DefinitelyWizardsItemDataModel,
 } from "./data-models.js";
-import { generatePracticalExam } from "./exam-generator.js";
+import { EXAM_ROLL_TABLES, generatePracticalExam } from "./exam-generator.js";
 import { DefinitelyWizardsItem } from "./item.js";
 import { DefinitelyWizardsItemSheet } from "./item-sheet.js";
 import {
@@ -62,28 +62,63 @@ Hooks.once("init", async () => {
 Hooks.once("ready", async () => {
     if (!game.users.activeGM?.isSelf) return;
 
-    const existingRollTables = new Set(game.tables.contents.map((doc) => doc.name));
+    const defaultTableIcons = new Set(["icons/svg/d20-black.svg", "icons/svg/d20-grey.svg"]);
+    const existingByName = new Map(game.tables.contents.map((doc) => [doc.name, doc]));
     const rollTablesToAdd = [];
-    const rollTables = {
-        Judge: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-judge.json",
-        RoomType: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-room-type.json",
-        MainObstacle:
-            "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-main-obstacle.json",
-        AddedChallenge:
-            "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-added-challenge.json",
-        Surprise: "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-surprise.json",
-        FinalTest:
-            "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-final-test.json",
-        MonsterFactoryCreature:
-            "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-monster-factory-creature.json",
-        MonsterFactoryTrait:
-            "systems/definitely-wizards/resources/roll-tables/fvtt-RollTable-monster-factory-trait.json",
-    };
 
-    for (const [name, url] of Object.entries(rollTables)) {
-        if (!existingRollTables.has(name)) {
-            const rollTable = await foundry.utils.fetchJsonWithTimeout(url);
+    for (const spec of Object.values(EXAM_ROLL_TABLES)) {
+        let existing = existingByName.get(spec.name);
+        let matchedLegacy = false;
+        if (!existing) {
+            for (const legacyName of spec.legacyNames) {
+                existing = existingByName.get(legacyName);
+                if (existing) {
+                    matchedLegacy = true;
+                    break;
+                }
+            }
+        }
+
+        if (!existing) {
+            const rollTable = await foundry.utils.fetchJsonWithTimeout(spec.url);
             rollTablesToAdd.push(rollTable);
+            continue;
+        }
+
+        const needsRename = matchedLegacy && !existingByName.has(spec.name);
+        const needsTableImg = defaultTableIcons.has(existing.img ?? "");
+        const resultsToUpdate =
+            existing.results?.filter?.((res) => defaultTableIcons.has(res.img ?? "")) ?? [];
+
+        if (!needsRename && !needsTableImg && resultsToUpdate.length === 0) continue;
+
+        /** @type {Record<string, any>} */
+        const updateData = {};
+        if (needsRename) {
+            updateData.name = spec.name;
+        }
+
+        let targetImg = "";
+        if (needsTableImg || resultsToUpdate.length > 0) {
+            const rollTable = await foundry.utils.fetchJsonWithTimeout(spec.url);
+            targetImg = rollTable?.img ?? "";
+            if (needsTableImg && targetImg) {
+                updateData.img = targetImg;
+            }
+        }
+
+        if (Object.keys(updateData).length > 0) {
+            await existing.update?.(updateData);
+            if (needsRename) {
+                existingByName.delete(existing.name);
+                existingByName.set(spec.name, existing);
+            }
+        }
+        if (targetImg && resultsToUpdate.length > 0) {
+            await existing.updateEmbeddedDocuments?.(
+                "TableResult",
+                resultsToUpdate.map((res) => ({ _id: res.id, img: targetImg })),
+            );
         }
     }
 

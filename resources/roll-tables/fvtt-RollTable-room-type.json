@@ -1,7 +1,7 @@
 {
-  "name": "RoomType",
+  "name": "Room Type",
   "sort": 100002,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
   "description": "Roll for all chambers.",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "JWc8tICHS5ZqhxaF",
       "name": "",
       "description": "<p>A typical dungeon with crates and weapons lying around and at least one skeleton</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "9APVWPKBoAhVXNni",
       "name": "",
       "description": "<p>A lavish study with suits of armor, paintings, mirrors, etc.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "ysjBwmvPlwRDnyrI",
       "name": "",
       "description": "<p>What appears to be an outdoor scene, but is actually a combination of illusion and real set pieces contained within a large room</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "HNDH7B46YmCRbksw",
       "name": "",
       "description": "<p>A kitchen for a large manor, complete with wood-burning ovens and a large pantry</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "MoOt0rwplBVgRFEF",
       "name": "",
       "description": "<p>A natural cavern with no clear exit and several branching tunnels</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "NdLo9rkKQzzhIYKf",
       "name": "",
       "description": "<p>A room set up like a life-size chess board or other board game</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-room-type.svg",
       "documentUuid": null,
       "flags": {}
     }

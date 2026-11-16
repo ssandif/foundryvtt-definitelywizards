@@ -1,7 +1,7 @@
 {
-  "name": "FinalTest",
+  "name": "Final Test",
   "sort": 100006,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
   "description": "Roll for the final chamber",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "YEZR9oAxF9x6FYR6",
       "name": "",
       "description": "<p>The key to the exit is in 3 parts, each on a necklace worn by 3 massive stone golems.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "GldfPM7Jep3V79R3",
       "name": "",
       "description": "<p>A giant spider has made this room its nest.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "MRfL2wDWKAsKgVyU",
       "name": "",
       "description": "<p>A group of animatronic soldiers guard the exit.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "VZiqVUr0mykfP5hL",
       "name": "",
       "description": "<p>A huge stone obelisk shoots near-deadly lasers at anything that moves.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "aN9vjOaUYvzRoyLn",
       "name": "",
       "description": "<p>You must defeat another group of wizards taking the test.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "1Y1yOZgQpsyJLigX",
       "name": "",
       "description": "<p>Come up with your own or roll again twice.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-final-test.svg",
       "documentUuid": null,
       "flags": {}
     }

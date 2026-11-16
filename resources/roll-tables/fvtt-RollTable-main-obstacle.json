@@ -1,7 +1,7 @@
 {
-  "name": "MainObstacle",
+  "name": "Main Obstacle",
   "sort": 100003,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
   "description": "Roll for all chambers",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "gj9eNft2KTjMarSX",
       "name": "",
       "description": "<p>The room is full of tripwires, pressure plates, and other traps.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "ZQ0OBlEx4dXmynUG",
       "name": "",
       "description": "<p>Some element of the room is animated and attacks the party.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "kOwTbgX4ynd9MvMp",
       "name": "",
       "description": "<p>There is a force field in the center of the room which must be deactivated.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "y2mSFKKT4FJ49GYL",
       "name": "",
       "description": "<p>The room is full of rabid vermin.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "dtsBVgXDyGVmprhh",
       "name": "",
       "description": "<p>The objects in the room must be organized in a particular pattern to unlock the door.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "zx60i3sAwLlc6Z8c",
       "name": "",
       "description": "<p>Come up with your own or roll again twice.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-main-obstacle.svg",
       "documentUuid": null,
       "flags": {}
     }

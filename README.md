@@ -17,7 +17,7 @@ Definitely Wizards is a rules-light TTRPG about pretending to be a wizard by Ell
 
 ### For GMs
 
-- **Exam & Monster Factory RollTables:** Eight RollTables (`Judge`, `RoomType`, `MainObstacle`, `AddedChallenge`, `Surprise`, `FinalTest`, `MonsterFactoryCreature`, and `MonsterFactoryTrait`) are imported into the world on first launch.
+- **Exam & Monster Factory RollTables:** Eight RollTables (`Judge`, `Room Type`, `Main Obstacle`, `Added Challenge`, `Surprise`, `Final Test`, `Monster Factory Creature`, and `Monster Factory Trait`) are imported into the world on first launch.
 - **Practical Exam Generator:** Run the **Generate Practical Exam** macro from the **GM Helpers** compendium (or `game.definitelyWizards.generatePracticalExam()`) to generate a 4-chamber exam—with optional auto-rerolls on `6` and a Chamber 4 Monster Factory boss—as a GM Journal Entry or whispered chat message.
 - **Compendiums:** Includes **Spells**, **Props**, **Player Macros**, and **GM Helpers** (full game rules are available at the itch.io link above).
 

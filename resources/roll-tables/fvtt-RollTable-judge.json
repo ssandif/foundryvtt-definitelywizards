@@ -1,7 +1,7 @@
 {
   "name": "Judge",
   "sort": 100001,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
   "description": "Determine how the test is judged",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "eqnSTFjpnNFu5fWY",
       "name": "",
       "description": "<p>An extremely stern elderly wizard is in the chambers with you, holding a clipboard and quill to take notes.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "Bvyj8WHXyWF5Oxpo",
       "name": "",
       "description": "<p>Each chamber has a large two-way mirror, with judges hidden on the other side.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "kVNFvDbxxA4W7zTI",
       "name": "",
       "description": "<p>There's a magical glowing orb following the players, linked to a proctor scrying from somewhere else.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "8s2nXyRykbt8K4Qi",
       "name": "",
       "description": "<p>The test is in a massive arena, with a panel of judges holding up scorecards and an audience of folks just here to watch the show.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "dRjT70puy5oWXSB9",
       "name": "",
       "description": "<p>A class from the Wizard Academy is observing the test. A professor explains your performance while the students take notes.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "z9KPp3KGGN1wW9CN",
       "name": "",
       "description": "<p>A magical automaton follows the players, talking to itself in an audiolog to be reviewed later.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-judge.svg",
       "documentUuid": null,
       "flags": {}
     }

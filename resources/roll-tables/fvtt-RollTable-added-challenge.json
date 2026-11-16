@@ -1,7 +1,7 @@
 {
-  "name": "AddedChallenge",
+  "name": "Added Challenge",
   "sort": 100004,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
   "description": "Add after the first chamber..",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "h2tvvcm5s74Tv5SI",
       "name": "",
       "description": "<p>The room is overgrown with vines that attempt to grab players.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "JAjFkUB3yuMJFsLT",
       "name": "",
       "description": "<p>The room has no gravity.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "yuK9ESouY8fQysie",
       "name": "",
       "description": "<p>The exit door is 30 feet up the wall.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "3tJBg1jz7tLjVxip",
       "name": "",
       "description": "<p>The room is full of mushrooms that shoot spores at the players.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "lSpKEhEpNYO4XzXR",
       "name": "",
       "description": "<p>The room is on fire.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "o2XxiMMlTvTYoGIh",
       "name": "",
       "description": "<p>Come up with your own or roll again twice.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-added-challenge.svg",
       "documentUuid": null,
       "flags": {}
     }

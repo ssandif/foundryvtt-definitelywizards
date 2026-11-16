@@ -1,7 +1,7 @@
 {
   "name": "Surprise",
   "sort": 100005,
-  "img": "icons/svg/d20-black.svg",
+  "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
   "description": "Add after the second chamber",
   "results": [
     {
@@ -12,7 +12,7 @@
       "_id": "CJ0F3fRL4WJIQHVZ",
       "name": "",
       "description": "<p>The room begins to fill with freezing cold water.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -24,7 +24,7 @@
       "_id": "gRxepZQHsINnlMcq",
       "name": "",
       "description": "<p>Players slowly shrink to 1/10 size.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -36,7 +36,7 @@
       "_id": "PK8iTLk5y8yKem0y",
       "name": "",
       "description": "<p>The room is haunted.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -48,7 +48,7 @@
       "_id": "FGMtLwLWFVGM5OAd",
       "name": "",
       "description": "<p>The ceiling begins to collapse.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -60,7 +60,7 @@
       "_id": "4OYfzwRaaUXku2Fa",
       "name": "",
       "description": "<p>An element of the room controls a player’s mind and makes them attack the rest of the party.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
       "documentUuid": null,
       "flags": {}
     },
@@ -72,7 +72,7 @@
       "_id": "5uentrTo6otw3hD2",
       "name": "",
       "description": "<p>Come up with your own or roll again twice.</p>",
-      "img": "icons/svg/d20-black.svg",
+      "img": "systems/definitely-wizards/resources/icons/table-surprise.svg",
       "documentUuid": null,
       "flags": {}
     }

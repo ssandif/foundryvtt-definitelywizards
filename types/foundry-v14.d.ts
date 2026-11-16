@@ -423,6 +423,20 @@ declare class ChatMessage {
 
 declare class RollTable {
     name: string;
+    img?: string;
+    results?: {
+        some?(predicate: (result: { id: string; img?: string }) => boolean): boolean;
+        filter?(predicate: (result: { id: string; img?: string }) => boolean): Array<{
+            id: string;
+            img?: string;
+        }>;
+    };
+    update?(data: Record<string, any>, options?: Record<string, any>): Promise<this | undefined>;
+    updateEmbeddedDocuments?(
+        embeddedName: string,
+        updates: Array<Record<string, any>>,
+        operation?: Record<string, any>,
+    ): Promise<any[]>;
     roll(options?: Record<string, any>): Promise<{
         roll: Roll;
         results: Array<{
