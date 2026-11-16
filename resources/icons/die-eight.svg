@@ -1,8 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <polygon points="32,6 54,32 32,58 10,32" fill="#fbbf24" stroke="#19160d" stroke-width="2.8" stroke-linejoin="round" />
-  <polygon points="32,6 45,38 19,38" fill="#fef9c3" stroke="#19160d" stroke-width="2.4" stroke-linejoin="round" />
-  <line x1="10" y1="32" x2="19" y2="38" stroke="#19160d" stroke-width="2.2" />
-  <line x1="54" y1="32" x2="45" y2="38" stroke="#19160d" stroke-width="2.2" />
-  <line x1="32" y1="58" x2="19" y2="38" stroke="#19160d" stroke-width="2.2" />
-  <line x1="32" y1="58" x2="45" y2="38" stroke="#19160d" stroke-width="2.2" />
+  <polygon points="32,6 54,32 32,58 10,32" fill="#eff6ff" />
+  <polygon points="32,32 54,32 32,58" fill="#cbd5e1" />
+  <polygon points="32,6 45,38 19,38" fill="#ffffff" stroke="#64748b" stroke-width="1.8" stroke-linejoin="round" />
+  <line x1="10" y1="32" x2="19" y2="38" stroke="#64748b" stroke-width="1.8" />
+  <line x1="54" y1="32" x2="45" y2="38" stroke="#64748b" stroke-width="1.8" />
+  <line x1="32" y1="58" x2="19" y2="38" stroke="#64748b" stroke-width="1.8" />
+  <line x1="32" y1="58" x2="45" y2="38" stroke="#64748b" stroke-width="1.8" />
+  <polygon points="32,6 54,32 32,58 10,32" fill="none" stroke="#1e2b4d" stroke-width="3" stroke-linejoin="round" />
 </svg>

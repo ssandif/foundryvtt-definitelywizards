@@ -1,12 +1,13 @@
 :root {
     --dw-margin: 10px;
-    --dw-color-dark: #19160d;
-    --dw-color-dark-10: rgb(25 22 13 / 10%);
-    --dw-color-med-dark: #4d3b00;
-    --dw-color-bright: #ffc80d;
-    --dw-color-medium: #e2e0cf;
-    --dw-color-light: #fdf2c3;
-    --dw-color-text: #121212;
+    --dw-color-dark: #1e293b;
+    --dw-color-dark-10: rgb(30 41 59 / 10%);
+    --dw-color-med-dark: #475569;
+    --dw-color-frame: #1e2b4d;
+    --dw-color-bright: #fbbf24;
+    --dw-color-medium: #e2e8f0;
+    --dw-color-light: #faf8f5;
+    --dw-color-text: #0f172a;
     --dw-color-light-text: #ffffff;
     --dw-font-title: "Title", sans-serif;
     --dw-font-body: "Body", sans-serif;
@@ -23,8 +24,20 @@
 }
 
 .definitelywizards.application {
-    --background: var(--dw-color-bright);
-    background: var(--dw-color-bright);
+    --background: var(--dw-color-frame);
+    background: var(--dw-color-frame);
+    border: 1px solid var(--dw-color-bright);
+
+    > .window-header {
+        background: var(--dw-color-frame);
+        color: var(--dw-color-light);
+        border-bottom: 2px solid var(--dw-color-bright);
+
+        .window-title,
+        button {
+            color: var(--dw-color-light);
+        }
+    }
 }
 
 .definitelywizards.sheet.actor {
@@ -39,7 +52,8 @@
 
 .definitelywizards.chat-card {
     background: var(--dw-color-light);
-    border: 1px solid var(--dw-color-dark-10);
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid var(--dw-color-frame);
     border-radius: 6px;
     padding: 6px;
 
@@ -388,8 +402,8 @@
         height: 64px;
         width: 64px;
         object-fit: cover;
-        background-color: #fffdf5;
-        border: 2px solid var(--dw-color-dark);
+        background-color: var(--dw-color-light-text);
+        border: 2px solid var(--dw-color-frame);
         border-radius: 6px;
     }
 
@@ -425,12 +439,12 @@
         display: flex;
         flex-direction: row;
         border-top: none;
-        border-bottom: 1px solid var(--dw-color-text);
+        border-bottom: 2px solid var(--dw-color-frame);
         margin: 14px 0 0 0;
 
         a {
-            background: rgb(25 22 13 / 5%);
-            border: 1px solid var(--dw-color-dark);
+            background: rgb(30 43 77 / 6%);
+            border: 1px solid #cbd5e1;
             border-bottom: none;
             border-radius: 10px 10px 0 0;
             flex: 1;
@@ -442,16 +456,19 @@
         }
 
         a.active {
-            background-color: var(--dw-color-bright);
-            color: var(--dw-color-text);
-            text-shadow: 0 0 10px var(--dw-color-bright);
+            background-color: var(--dw-color-frame);
+            border-color: var(--dw-color-frame);
+            color: var(--dw-color-light);
+            text-shadow: none;
+            box-shadow: inset 0 2px 0 var(--dw-color-bright);
         }
     }
 
     .sheet-body {
-        background: #fffdf5;
-        border: 1px solid var(--dw-color-text);
-        border-radius: 0 6px 6px 6px;
+        background: var(--dw-color-light-text);
+        border: 1px solid var(--dw-color-frame);
+        border-top: none;
+        border-radius: 0 0 6px 6px;
         padding: 5px;
         display: flex;
         flex-direction: column;
@@ -487,8 +504,8 @@
             height: 100px;
             width: 100px;
             object-fit: cover;
-            background-color: #fffdf5;
-            border: 2px solid var(--dw-color-dark);
+            background-color: var(--dw-color-light-text);
+            border: 2px solid var(--dw-color-frame);
             border-radius: 6px;
         }
 
@@ -812,31 +829,61 @@
         }
 
         .dw-item-list,
-        .dw-prop-list {
+        .dw-prop-list,
+        .dw-spells-scroll {
             flex: 1;
             min-height: 0;
             overflow-y: auto;
+            scrollbar-width: thin;
+            padding-right: 2px;
+            background:
+                linear-gradient(#ffffff 30%, rgb(255 255 255 / 0%)) center top,
+                linear-gradient(rgb(255 255 255 / 0%), #ffffff 70%) center bottom,
+                linear-gradient(rgb(30 43 77 / 16%), rgb(30 43 77 / 0%)) center top,
+                linear-gradient(rgb(30 43 77 / 0%), rgb(30 43 77 / 16%)) center bottom;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-size:
+                100% 36px,
+                100% 36px,
+                100% 14px,
+                100% 14px;
+            background-attachment: local, local, scroll, scroll;
+        }
+
+        .dw-item-list > li.item,
+        .dw-prop-list > li.item,
+        .dw-spell-list > li.item {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .dw-wild-spells-section {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+            flex: 0 0 auto;
+        }
+
+        .dw-wild-spells-title-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border-bottom: 2px solid #f472b6;
+            margin-bottom: 6px;
+            padding-bottom: 2px;
+
+            h2 {
+                flex: 0 0 auto;
+                border-bottom: none;
+                color: #831843;
+            }
         }
 
         .dw-wild-spell-bar {
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 6px 8px;
-            margin-bottom: 10px;
-            background: #fff1f5;
-            border: 1px solid #f9a8d4;
-            border-left: 4px solid #be185d;
-            border-radius: 4px;
+            gap: 6px;
             flex: 0 0 auto;
-
-            .dw-wild-spell-title {
-                flex: 0 0 auto;
-                font-family: var(--dw-font-title);
-                font-size: 1rem;
-                color: #831843;
-                white-space: nowrap;
-            }
 
             input.dw-wild-spell-note {
                 flex: 1;
@@ -847,6 +894,12 @@
                 padding: 3px 6px;
                 height: 26px;
                 box-sizing: border-box;
+                border-color: #f472b6;
+            }
+
+            input.dw-wild-spell-note:focus {
+                outline: 1px solid #be185d;
+                box-shadow: 0 0 5px rgb(190 24 93 / 35%);
             }
 
             .dw-wild-spell-actions {
@@ -863,7 +916,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 8px;
-            border-bottom: 2px solid var(--dw-color-text);
+            border-bottom: 2px solid #60a5fa;
             margin-bottom: 6px;
             padding-bottom: 2px;
             flex: 0 0 auto;
@@ -871,6 +924,7 @@
             h2 {
                 flex: 0 0 auto;
                 border-bottom: none;
+                color: #1e3a8a;
             }
         }
 
@@ -879,14 +933,6 @@
             font-size: 0.75rem;
             padding: 2px 8px;
             white-space: nowrap;
-        }
-
-        .dw-spells-scroll {
-            flex: 1;
-            min-height: 0;
-            overflow-y: auto;
-            scrollbar-width: thin;
-            padding-right: 2px;
         }
 
         .dw-spell-list {
