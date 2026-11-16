@@ -76,6 +76,7 @@ jobs:
             resources/ \
             LICENSE.txt \
             README.md \
+            credits.md \
             release-notes.txt \
             -x "packs/_source*"
 
