@@ -4,6 +4,9 @@
 
 # Node Modules
 node_modules/
-package-lock.json
 local-images/
 .vscode/launch.json
+
+# Compiled LevelDB compendiums
+packs/*
+!packs/_source/

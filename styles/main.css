@@ -1,581 +1,1081 @@
-h1,
-h2,
-h3,
-h4 {
-  margin: 0px;
+:root {
+    --dw-margin: 10px;
+    --dw-color-dark: #1e293b;
+    --dw-color-dark-10: rgb(30 41 59 / 10%);
+    --dw-color-med-dark: #475569;
+    --dw-color-frame: #1e2b4d;
+    --dw-color-bright: #fbbf24;
+    --dw-color-medium: #e2e8f0;
+    --dw-color-light: #faf8f5;
+    --dw-color-text: #0f172a;
+    --dw-color-light-text: #ffffff;
+    --dw-font-title: "Title", sans-serif;
+    --dw-font-body: "Body", sans-serif;
 }
-.window-app .window-content,
-.app,
-body {
-  font-family: Body;
-  background-image: none;
-  color: #121212;
-}
-.window-app .window-content {
-  background: #fdf2c3;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #4d3b00;
-  border: 1px solid #ffffff;
-}
-.app {
-  background: #ffc80d;
-}
-body {
-  background: #E2E0CF;
-}
-#chat-log .message,
-#chat-log .message.whisper,
-#chat-form textarea {
-  background: none;
-  background: #fdf2c3;
-}
-.flavor-text {
-  color: #121212;
-}
-h2 {
-  font-family: Title;
-  border-bottom: 2px solid #121212;
-}
-input[type="text"] {
-  border: 1px solid #121212;
-  border-radius: 0px;
-  font-family: Title;
-  font-size: 1.3em;
-  padding: 0 5px;
-}
-select:focus,
-textarea:focus,
-input[type="text"]:focus {
-  outline: 1px solid #19160D;
-  box-shadow: 0 0 5px #4d3b00;
-}
-a:hover {
-  text-shadow: 0 0 8px #ffc80d;
-}
-select,
-button,
-textarea,
-form button {
-  font-family: Body;
-  border-radius: 0;
-  border: 1px solid #19160D;
-}
-button:hover {
-  box-shadow: 0 0 10px #ffc80d;
-}
-#chat-log .message,
-#chat-log .message h2,
-#chat-log .message h3,
-button,
-input,
-input[type="text"],
-input[type="password"],
-input[type="datetime-local"] {
-  color: #121212;
-}
-.sheet-footer {
-  margin-top: 10px;
-}
-.fa-cog:before,
-.fa-plus:before,
-.fa-caret-left:before,
-.fa-caret-right:before,
-.fa-angle-down:before,
-.fa-angle-up:before,
-.fa-search:before,
-.fa-arrow-down-a-z:before,
-.fa-arrow-up-a-z:before,
-.fa-arrow-down-short-wide:before,
-.fa-arrow-up-short-wide:before,
-.fa-folder-tree:before {
-  color: #121212;
-}
-.window-content .fa-plus:before {
-  color: #121212;
-}
-.tabs .item.active {
-  text-shadow: 0 0 10px #ffc80d;
-}
-#sidebar-tabs {
-  box-shadow: 0 0 10px #ffc80d;
-  border-bottom: 1px solid #19160D;
-}
-#sidebar-tabs > .item.active {
-  border: 1px solid #19160D;
-  box-shadow: 0 0 6px inset #4d3b00;
-  color: #ffffff;
-}
-.sidebar-tab .directory-header,
-#combat #combat-round {
-  border-bottom: 2px solid #19160D;
-}
-#combat #combat-controls {
-  border-top: 2px solid #19160D;
-}
-#settings h2 {
-  border-top: 1px solid #19160D;
-  border-bottom: 1px solid #19160D;
-}
-#settings hr {
-  border-color: #19160D;
-}
-.directory-item .document-name {
-  color: #121212;
-}
-.sidebar-tab .directory-list .directory-item img {
-  flex: 0 0 30px;
-  height: 30px;
-  width: 30px;
-  align-self: center;
-  margin: 5px;
-}
-li.folder > .folder-header h3 {
-  color: #121212;
-}
-div.card-buttons {
-  margin-top: 5px;
-}
-.combat-sidebar .combat-tracker-header nav.encounters h4,
-.combat-sidebar .combat-tracker-header a.combat-button {
-  color: #121212;
-}
-#hotbar .macro:hover {
-  box-shadow: 0 0 10px #ffc80d inset;
-}
-#hotbar .macro.active:hover {
-  border: 1px solid #4d3b00;
-}
-#navigation #scene-list .scene.gm {
-  color: #ffffff;
-  border: 1px solid #4d3b00;
-}
-#navigation #scene-list .scene.view,
-#navigation #scene-list .scene.context {
-  color: #ffffff;
-  border: 1px solid #ffc80d;
-  border-bottom: 2px solid #ffc80d;
-  box-shadow: 0 0 10px #fdf2c3;
-}
-#navigation #nav-toggle:hover {
-  text-shadow: 0 0 10px #ffc80d;
-}
-#navigation #scene-list .scene {
-  color: #ffffff;
-}
-#controls ol.control-tools > li.active,
-#controls ol.control-tools > li:hover {
-  color: #ffffff;
-  border: 1px solid #ffc80d;
-  border-bottom: 2px solid #ffc80d;
-  box-shadow: 0 0 10px #19160D;
-}
-.camera-view .player-name {
-  color: #ffffff;
-  border: 2px solid #ffc80d;
-}
-#players ol .player-name.self {
-  color: #121212;
-  font-weight: bold;
-}
-.directory-item .compendium-name {
-  color: #ffffff;
-}
-.compendium-sidebar .directory-item.compendium:hover .compendium-name {
-  text-shadow: 0 0 8px #ffc80d;
-}
-.compendium-footer .source {
-  color: #ffffff;
-}
-.compendium-footer .source .fa-solid {
-  color: #ffffff;
-}
-li.folder > .folder-header .create-button .fa-plus {
-  background: none;
-}
+
 @font-face {
-  font-family: Title;
-  src: url('/systems/definitely-wizards/resources/fonts/Chelsea_Market/ChelseaMarket-Regular.ttf');
+    font-family: "Title";
+    src: url("../resources/fonts/Chelsea_Market/ChelseaMarket-Regular.ttf");
 }
+
 @font-face {
-  font-family: Body;
-  src: url('/systems/definitely-wizards/resources/fonts/Montserrat/Montserrat-Medium.ttf');
+    font-family: "Body";
+    src: url("../resources/fonts/Montserrat/Montserrat-Medium.ttf");
 }
-.grid-columns {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
-  align-items: center;
-  gap: 10px;
+
+.definitelywizards.application {
+    --background: var(--dw-color-frame);
+    background: var(--dw-color-frame);
+    border: 1px solid var(--dw-color-bright);
+
+    > .window-header {
+        background: var(--dw-color-frame);
+        color: var(--dw-color-light);
+        border-bottom: 2px solid var(--dw-color-bright);
+
+        .window-title,
+        button {
+            color: var(--dw-color-light);
+        }
+    }
 }
-.grid-rows {
-  display: grid;
-  grid-auto-rows: max-content;
-  gap: 10px;
+
+.definitelywizards.sheet.actor {
+    min-width: 660px;
+    min-height: 460px;
 }
-.no-border {
-  border: hidden;
+
+.definitelywizards.sheet.item {
+    min-width: 400px;
+    min-height: 300px;
 }
-.expand:hover {
-  transform: scale(1.1);
+
+.definitelywizards.chat-card {
+    background: var(--dw-color-light);
+    border: 1px solid #cbd5e1;
+    border-left: 4px solid var(--dw-color-frame);
+    border-radius: 6px;
+    padding: 6px;
+
+    .card-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 6px;
+    }
+
+    button:not(.icon):disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    .dw-cast-spell-header {
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid var(--dw-color-dark-10);
+    }
+
+    .dw-cast-spell-description {
+        font-size: 0.85em;
+        margin-bottom: 6px;
+    }
+
+    .dw-wit-bonus-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 4px 0 6px;
+        padding: 3px 6px;
+        background: var(--dw-color-dark-10);
+        border-radius: 3px;
+        font-size: 0.85em;
+    }
+
+    .dw-wit-label {
+        font-weight: 600;
+    }
+
+    .dw-dice-faces {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .dw-die-face {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        border: 1px solid var(--dw-color-dark);
+        background: var(--dw-color-light-text);
+        font-family: var(--dw-font-title);
+        font-size: 0.9em;
+    }
+
+    .dw-die-face.kept {
+        border-width: 2px;
+        background: var(--dw-color-bright);
+        font-weight: 700;
+    }
+
+    .dw-die-face.dropped {
+        opacity: 0.5;
+        text-decoration: line-through;
+    }
+
+    .dw-reset-banner {
+        background: var(--dw-color-dark-10);
+        border-left: 3px solid var(--dw-color-med-dark);
+        padding: 4px 6px;
+        margin: 4px 0;
+    }
+
+    .dw-resolution-status {
+        width: 100%;
+        font-size: 0.8em;
+        font-weight: 600;
+        color: var(--dw-color-med-dark);
+        padding: 2px 4px;
+    }
 }
-.error-red {
-  color: darkred !important;
-}
+
 .definitelywizards .window-content {
-  color: #121212;
-  height: 100%;
-  padding: 10px;
-  overflow-y: auto;
+    background: var(--dw-color-light);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    padding: var(--dw-margin);
+    overflow-y: auto;
 }
-.definitelywizards .sheet-panel {
-  display: grid;
-  grid-template-rows: max-content max-content 1fr;
+
+.definitelywizards .window-content,
+.definitelywizards.chat-card {
+    font-family: var(--dw-font-body);
+    color: var(--dw-color-text);
+    color-scheme: light;
+    --color-text-primary: var(--dw-color-text);
+    --color-text-secondary: var(--dw-color-med-dark);
+    --input-background-color: var(--dw-color-light-text);
+    --input-text-color: var(--dw-color-text);
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        margin: 0;
+        color: var(--dw-color-text);
+    }
+
+    h2 {
+        font-family: var(--dw-font-title);
+        border-bottom: 2px solid var(--dw-color-text);
+    }
+
+    input[type="text"] {
+        border: 1px solid var(--dw-color-text);
+        border-radius: 0;
+        font-family: var(--dw-font-title);
+        font-size: 1.25em;
+        line-height: 1.2;
+        padding: 2px 6px;
+        color: var(--dw-color-text);
+        background: var(--dw-color-light-text);
+    }
+
+    select,
+    textarea {
+        font-family: var(--dw-font-body);
+        border-radius: 0;
+        border: 1px solid var(--dw-color-dark);
+        color: var(--dw-color-text);
+        background: var(--dw-color-light-text);
+    }
+
+    button:not(.icon) {
+        border-radius: 0;
+        border: 1px solid var(--dw-color-dark);
+        color: var(--dw-color-text);
+        background: var(--dw-color-medium);
+    }
+
+    select:focus,
+    textarea:focus,
+    input[type="text"]:focus {
+        outline: 1px solid var(--dw-color-dark);
+        box-shadow: 0 0 5px var(--dw-color-med-dark);
+    }
+
+    a:hover {
+        text-shadow: 0 0 8px var(--dw-color-bright);
+    }
+
+    button:not(.icon):hover {
+        box-shadow: 0 0 10px var(--dw-color-bright);
+    }
+
+    prose-mirror {
+        --min-height: 150px;
+        --menu-height: 32px;
+        --color-control-hover: var(--dw-color-bright);
+        --menu-background: var(--dw-color-dark-10);
+        --dropdown-background: var(--dw-color-medium);
+        --dropdown-border: var(--dw-color-dark);
+        --button-text-color: var(--dw-color-text);
+        --button-background-color: transparent;
+        --button-hover-background-color: var(--dw-color-bright);
+        --button-hover-text-color: var(--dw-color-text);
+        min-height: 150px;
+    }
+
+    prose-mirror button.toggle {
+        background: var(--dw-color-light);
+        color: var(--dw-color-dark);
+        border: 1px solid var(--dw-color-dark);
+        z-index: 2;
+    }
+
+    prose-mirror button.toggle:hover {
+        background: var(--dw-color-bright);
+        color: var(--dw-color-dark);
+    }
+
+    .grid-columns {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        align-items: center;
+        gap: var(--dw-margin);
+    }
+
+    .grid-rows {
+        display: grid;
+        grid-auto-rows: max-content;
+        gap: var(--dw-margin);
+    }
+
+    .flexrow {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .no-border {
+        border: hidden;
+    }
+
+    .expand:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .draggable[draggable="true"]:not(.stat-locked) {
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    .draggable.expand[draggable="true"]:not(.stat-locked):hover {
+        cursor: grab;
+    }
+
+    .stat-locked {
+        opacity: 0.35;
+        filter: grayscale(1);
+        cursor: not-allowed;
+    }
+
+    .stat-locked.expand:hover {
+        transform: none;
+        cursor: not-allowed;
+    }
+
+    .error-red {
+        color: darkred;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .tab:not(.active) {
+        display: none;
+    }
+
+    .chatItem .item-image {
+        flex: 0 0 15px;
+        height: 15px;
+        width: 15px;
+        background-size: cover;
+        background-position: 50% 0;
+        border: none;
+    }
 }
-.definitelywizards .sheet-panel nav.sheet-tabs {
-  border-top: none;
-  border-bottom: 1px solid #121212;
-  margin: 14px 0px 0px 0px;
+
+.definitelywizards.chat-card {
+    &[data-isWizardRoll="true"],
+    &.dw-wizard-card {
+        background: #eef4ff;
+        border-left: 4px solid #1d4ed8;
+        --color-text-secondary: #1e40af;
+
+        .dw-cast-spell-header {
+            border-bottom-color: rgb(29 78 216 / 20%);
+        }
+
+        h2,
+        .card-content p:first-child strong {
+            color: #1e3a8a;
+        }
+
+        .dw-wit-bonus-row,
+        .dw-reset-banner {
+            background: rgb(29 78 216 / 10%);
+        }
+
+        .dw-reset-banner {
+            border-left-color: #1d4ed8;
+        }
+
+        .dw-die-face.kept {
+            background: #fbbf24;
+            border-color: #1d4ed8;
+            color: #172554;
+        }
+    }
+
+    &[data-isWizardRoll="false"],
+    &.dw-wild-card {
+        background: #fff1f5;
+        border-left: 4px solid #be185d;
+        --color-text-secondary: #9d174d;
+
+        .dw-cast-spell-header {
+            border-bottom-color: rgb(190 24 93 / 20%);
+        }
+
+        h2,
+        .card-content p:first-child strong {
+            color: #831843;
+        }
+
+        .dw-wit-bonus-row,
+        .dw-reset-banner {
+            background: rgb(190 24 93 / 10%);
+        }
+
+        .dw-reset-banner {
+            border-left-color: #be185d;
+        }
+
+        .dw-die-face.kept {
+            background: #fdba74;
+            border-color: #be185d;
+            color: #500724;
+        }
+    }
+
+    .dw-outcome-success {
+        color: #166534;
+    }
+
+    .dw-outcome-fail {
+        color: #991b1b;
+    }
 }
-.definitelywizards .sheet-panel nav.sheet-tabs a.active {
-  background-color: #ffc80d;
+
+.definitelywizards.item .window-content .sheet-header {
+    display: flex;
+    align-items: center;
+    gap: var(--dw-margin);
+    margin-bottom: var(--dw-margin);
+
+    > img {
+        height: 64px;
+        width: 64px;
+        object-fit: cover;
+        background-color: var(--dw-color-light-text);
+        border: 2px solid var(--dw-color-frame);
+        border-radius: 6px;
+    }
+
+    > img[data-action="editImage"] {
+        cursor: pointer;
+    }
+
+    > h1 {
+        flex: 1;
+        font-size: 1.4rem;
+        line-height: 1.2;
+        margin: 0;
+
+        input[type="text"] {
+            width: 100%;
+            height: auto;
+            min-height: 38px;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            padding: 4px 8px;
+            margin: 0;
+        }
+    }
 }
-.definitelywizards .sheet-panel nav.sheet-tabs a {
-  border: 1px solid #19160D;
-  border-radius: 10px 10px 0px 0px;
-  flex: 1;
-  font-family: Title;
+
+.definitelywizards .window-content .dw-sheet-panel {
+    display: grid;
+    grid-template-rows: max-content max-content 1fr;
+    flex: 1;
+    min-height: 0;
+
+    nav.sheet-tabs {
+        display: flex;
+        flex-direction: row;
+        border-top: none;
+        border-bottom: 2px solid var(--dw-color-frame);
+        margin: 14px 0 0 0;
+
+        a {
+            background: rgb(30 43 77 / 6%);
+            border: 1px solid #cbd5e1;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            flex: 1;
+            font-family: var(--dw-font-title);
+            color: var(--dw-color-text);
+            text-align: center;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        a.active {
+            background-color: var(--dw-color-frame);
+            border-color: var(--dw-color-frame);
+            color: var(--dw-color-light);
+            text-shadow: none;
+            box-shadow: inset 0 2px 0 var(--dw-color-bright);
+        }
+    }
+
+    .sheet-body {
+        background: var(--dw-color-light-text);
+        border: 1px solid var(--dw-color-frame);
+        border-top: none;
+        border-radius: 0 0 6px 6px;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: auto;
+
+        .tab.active {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .editor {
+            min-height: 120px;
+            height: 100%;
+            overflow-y: auto;
+        }
+    }
+
+    .dw-stat-panel {
+        height: auto;
+        display: grid;
+        grid-template-columns: 100px 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "portrait name name"
+            "portrait wizard wild";
+        gap: var(--dw-margin);
+
+        .profile-img {
+            grid-area: portrait;
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            background-color: var(--dw-color-light-text);
+            border: 2px solid var(--dw-color-frame);
+            border-radius: 6px;
+        }
+
+        .profile-img[data-action="editImage"] {
+            cursor: pointer;
+        }
+
+        .char-name {
+            grid-area: name;
+            border-bottom: 0;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            margin: 0;
+
+            input[type="text"] {
+                width: 100%;
+                height: auto;
+                min-height: 38px;
+                font-size: 1.4rem;
+                line-height: 1.2;
+                padding: 4px 8px;
+                margin: 0;
+            }
+        }
+
+        .dw-stat-wizard,
+        .dw-stat-wild {
+            gap: 4px;
+            margin-top: 0;
+            padding: 6px 8px;
+            border-radius: 6px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas:
+                "title title title"
+                "value die dice"
+                "plus minus reset";
+            align-items: center;
+            justify-items: center;
+        }
+
+        .stat-title {
+            grid-area: title;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+            font-size: 1.15rem;
+            padding-bottom: 2px;
+        }
+
+        .dw-stat-title-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dw-stat-icon {
+            display: block;
+            width: 22px;
+            height: 22px;
+            flex: 0 0 auto;
+        }
+
+        .dw-stat-badge {
+            font-family: var(--dw-font-body);
+            font-size: 0.65rem;
+            font-weight: 700;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            padding: 2px 6px;
+            border-radius: 999px;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+
+        .dw-stat-badge.dw-stat-badge-arrested {
+            background: #dc2626;
+            color: #ffffff;
+            border-color: #fca5a5;
+        }
+
+        .dw-stat-wizard {
+            grid-area: wizard;
+            background: #eff6ff;
+            border: 1.5px solid #60a5fa;
+            border-left: 4px solid #1e2b4d;
+
+            .stat-title {
+                background: #1e2b4d;
+                color: #eff6ff;
+                border-radius: 4px;
+                padding: 3px 8px;
+                border-bottom: 2px solid #fbbf24;
+            }
+        }
+
+        .dw-stat-wild {
+            grid-area: wild;
+            background: #fff1f2;
+            border: 1.5px solid #f472b6;
+            border-left: 4px solid #431a3d;
+
+            .stat-title {
+                background: #431a3d;
+                color: #fff1f2;
+                border-radius: 4px;
+                padding: 3px 8px;
+                border-bottom: 2px solid #fb923c;
+            }
+        }
+
+        .stat-button {
+            height: 40px;
+            grid-area: icon;
+        }
+
+        .stat-button-plus {
+            height: 25px;
+            grid-area: plus;
+        }
+
+        .stat-button-minus {
+            height: 25px;
+            grid-area: minus;
+        }
+
+        .stat-button-reset {
+            height: 25px;
+            grid-area: reset;
+        }
+
+        .stat-roll-single {
+            height: 35px;
+            grid-area: die;
+        }
+
+        .stat-roll-double {
+            height: 35px;
+            grid-area: dice;
+        }
+
+        .stat-value {
+            font-size: 45px;
+            font-family: var(--dw-font-title);
+            color: var(--dw-color-text);
+            height: 50px;
+            text-align: center;
+            width: 40px;
+            border: 0;
+            background: transparent;
+            grid-area: value;
+        }
+
+        .stat-value.error-red {
+            color: #991b1b;
+        }
+    }
+
+    .dw-attributes-tab {
+        display: grid;
+        grid-template-columns: max-content minmax(240px, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+        flex: 1;
+        min-height: 0;
+        gap: var(--dw-margin);
+    }
+
+    .dw-attributes-panel {
+        margin-right: 0.5rem;
+
+        .dw-attributes {
+            display: grid;
+            gap: var(--dw-margin);
+            margin-top: var(--dw-margin);
+
+            label {
+                grid-area: attr-label;
+            }
+
+            select {
+                grid-area: attr-select;
+                box-sizing: border-box;
+                width: 100%;
+                min-width: 0;
+            }
+
+            img {
+                grid-area: attr-roller;
+            }
+
+            button.add-starting-prop {
+                grid-area: attr-add;
+                box-sizing: border-box;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                width: 100%;
+                height: 28px;
+                min-height: 0;
+                margin: 0;
+                font-size: 0.72rem;
+                line-height: 1.2;
+                padding: 3px 6px;
+                white-space: nowrap;
+            }
+
+            button.add-starting-prop.in-inventory {
+                background: var(--dw-color-light);
+                color: var(--dw-color-med-dark);
+                border-color: var(--dw-color-med-dark);
+            }
+
+            input {
+                grid-area: attr-custom;
+                box-sizing: border-box;
+                width: 100%;
+                min-width: 0;
+            }
+
+            .prop-hint {
+                grid-area: attr-hint;
+                box-sizing: border-box;
+                width: 0;
+                min-width: 100%;
+                margin: 0;
+                font-size: 0.78rem;
+                line-height: 1.25;
+                color: var(--dw-color-med-dark);
+                font-style: italic;
+            }
+        }
+
+        .attribute {
+            align-items: center;
+            display: grid;
+            gap: 4px var(--dw-margin);
+            grid-template-columns: 72px minmax(240px, 260px) 25px 112px;
+            grid-template-areas:
+                "attr-label attr-select attr-roller attr-add"
+                ". attr-custom . ."
+                ". attr-hint attr-hint attr-hint";
+        }
+    }
+
+    .dw-bio-panel {
+        display: grid;
+        grid-template-rows: max-content minmax(0, 1fr);
+        flex: 1;
+        min-height: 0;
+
+        prose-mirror {
+            --min-height: 120px;
+            min-height: 120px;
+            height: 100%;
+        }
+
+        prose-mirror .editor-content {
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        .editor {
+            min-height: 120px;
+            height: 100%;
+            overflow-y: auto;
+        }
+    }
+
+    .dw-class-description-panel {
+        display: grid;
+        grid-template-rows: max-content minmax(0, 1fr);
+        margin-right: 0.5rem;
+        min-width: 0;
+        min-height: 0;
+
+        prose-mirror {
+            --min-height: 140px;
+            min-height: 140px;
+            height: 100%;
+        }
+
+        prose-mirror .editor-content {
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        .editor {
+            min-height: 120px;
+            height: 100%;
+            overflow-y: auto;
+        }
+    }
+
+    .dw-middle-panel {
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+        gap: var(--dw-margin);
+        flex: 1;
+        min-height: 0;
+    }
+
+    .dw-items-panel,
+    .dw-props-panel,
+    .dw-spells-panel {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+
+        ol {
+            list-style: none;
+            margin: 0;
+            scrollbar-width: thin;
+            padding: 0 5px;
+        }
+
+        .dw-item-list,
+        .dw-prop-list,
+        .dw-spells-scroll {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            padding-right: 2px;
+            background:
+                linear-gradient(#ffffff 30%, rgb(255 255 255 / 0%)) center top,
+                linear-gradient(rgb(255 255 255 / 0%), #ffffff 70%) center bottom,
+                linear-gradient(rgb(30 43 77 / 16%), rgb(30 43 77 / 0%)) center top,
+                linear-gradient(rgb(30 43 77 / 0%), rgb(30 43 77 / 16%)) center bottom;
+            background-color: #ffffff;
+            background-repeat: no-repeat;
+            background-size:
+                100% 36px,
+                100% 36px,
+                100% 14px,
+                100% 14px;
+            background-attachment: local, local, scroll, scroll;
+        }
+
+        .dw-item-list > li.item,
+        .dw-prop-list > li.item,
+        .dw-spell-list > li.item {
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .dw-wild-spells-section {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+            flex: 0 0 auto;
+        }
+
+        .dw-wild-spells-title-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            border-bottom: 2px solid #f472b6;
+            margin-bottom: 6px;
+            padding-bottom: 2px;
+
+            h2 {
+                flex: 0 0 auto;
+                border-bottom: none;
+                color: #831843;
+            }
+        }
+
+        .dw-wild-spell-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex: 0 0 auto;
+
+            input.dw-wild-spell-note {
+                flex: 1;
+                min-width: 0;
+                font-family: var(--dw-font-body);
+                font-size: 0.85rem;
+                line-height: 1.3;
+                padding: 3px 6px;
+                height: 26px;
+                box-sizing: border-box;
+                border-color: #f472b6;
+            }
+
+            input.dw-wild-spell-note:focus {
+                outline: 1px solid #be185d;
+                box-shadow: 0 0 5px rgb(190 24 93 / 35%);
+            }
+
+            .dw-wild-spell-actions {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                flex: 0 0 auto;
+            }
+        }
+
+        .dw-spells-title-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #60a5fa;
+            margin-bottom: 6px;
+            padding-bottom: 2px;
+            flex: 0 0 auto;
+
+            h2 {
+                flex: 0 0 auto;
+                border-bottom: none;
+                color: #1e3a8a;
+            }
+        }
+
+        .add-default-spells-btn {
+            flex: 0 0 auto;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            white-space: nowrap;
+        }
+
+        .dw-spell-list {
+            overflow-y: visible;
+            height: auto;
+        }
+
+        .costuming-btn,
+        .cast-spell-btn {
+            flex: 0 0 auto;
+            font-size: 0.7rem;
+            font-weight: 600;
+            line-height: 1.1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .costuming-btn.costuming-wizard,
+        .dw-spell-list .cast-spell-btn {
+            background: #dbeafe;
+            border-color: #1d4ed8;
+            color: #1e3a8a;
+        }
+
+        .costuming-btn.costuming-wild,
+        .dw-wild-spell-bar .cast-spell-btn {
+            background: #fce7f3;
+            border-color: #be185d;
+            color: #831843;
+        }
+
+        .add-item,
+        .add-spell,
+        .add-prop,
+        .item-control,
+        .prop-control,
+        .spell-control {
+            flex: 0 0 auto;
+        }
+
+        .add-item,
+        .add-spell,
+        .add-prop {
+            font-size: 0.7rem;
+            align-self: center;
+        }
+
+        .add-item:hover,
+        .add-spell:hover,
+        .add-prop:hover {
+            text-shadow: 2px 2px 4px var(--dw-color-dark);
+            cursor: pointer;
+        }
+
+        .item-roll,
+        .spell-roll,
+        .prop-roll {
+            cursor: pointer;
+        }
+
+        .item-name,
+        .spell-name,
+        .prop-name {
+            margin: 0;
+            overflow: hidden;
+            align-items: center;
+
+            .item-image,
+            .spell-image,
+            .prop-image {
+                flex: 0 0 30px;
+                height: 30px;
+                width: 30px;
+                margin: 5px;
+                background-size: cover;
+                background-position: 50% 0;
+                border: none;
+                border-radius: 4px;
+            }
+        }
+
+        .items-header,
+        .spells-header,
+        .props-header {
+            border-bottom: 1px solid var(--dw-color-dark);
+
+            .item-name,
+            .spell-name,
+            .prop-name {
+                padding-left: 5px;
+                text-align: left;
+                border-bottom: none;
+            }
+        }
+
+        .item-description,
+        .spell-description,
+        .prop-description {
+            margin-right: 5px;
+        }
+
+        .item-controls {
+            flex: 0 0 68px;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 6px;
+        }
+
+        .prop-controls {
+            flex: 0 0 auto;
+            min-width: 135px;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+
+        .spell-controls {
+            flex: 0 0 auto;
+            min-width: 120px;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px;
+        }
+    }
 }
-.definitelywizards .sheet-panel .sheet-body {
-  border: 1px solid #121212;
-  padding: 5px;
-}
-.definitelywizards .sheet-panel #stat-panel {
-  height: auto;
-  display: grid;
-  grid-template-columns: 100px 1fr 1fr;
-  grid-template-rows: 40px 1fr;
-  grid-template-areas: "portrait name name" "portrait wizard wild";
-  gap: 10px;
-}
-.definitelywizards .sheet-panel #stat-panel .profile-img {
-  grid-area: portrait;
-  height: 100px;
-  background-color: rgba(25, 22, 13, 0.1);
-}
-.definitelywizards .sheet-panel #stat-panel .char-name {
-  grid-area: name;
-  border-bottom: 0;
-}
-.definitelywizards .sheet-panel #stat-panel .char-name input {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-.definitelywizards .sheet-panel #stat-panel #stat-wizard,
-.definitelywizards .sheet-panel #stat-panel #stat-wild {
-  grid-area: wizard;
-  gap: 0;
-  margin-top: -10px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: auto 1fr;
-  grid-template-areas: "title title title ." "value die dice." "plus minus reset .";
-  align-items: center;
-}
-.definitelywizards .sheet-panel #stat-panel #stat-wizard {
-  grid-area: wizard;
-}
-.definitelywizards .sheet-panel #stat-panel #stat-wild {
-  grid-area: wild;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-title {
-  grid-area: title;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-button {
-  height: 40px;
-  grid-area: icon;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-button-plus {
-  height: 25px;
-  grid-area: plus;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-button-minus {
-  height: 25px;
-  grid-area: minus;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-button-reset {
-  height: 25px;
-  grid-area: reset;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-roll-single {
-  height: 35px;
-  grid-area: die;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-roll-double {
-  height: 35px;
-  grid-area: dice;
-}
-.definitelywizards .sheet-panel #stat-panel .stat-value {
-  font-size: 45px;
-  font-family: Title;
-  height: 50px;
-  text-align: center;
-  width: 40px;
-  border: 0;
-  background: transparent;
-  grid-area: value;
-}
-.definitelywizards .sheet-panel #attributes-tab {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto 1fr;
-}
-.definitelywizards .sheet-panel #attributes-panel {
-  margin-right: 0.5rem;
-}
-.definitelywizards .sheet-panel #attributes-panel #attributes {
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
-}
-.definitelywizards .sheet-panel #attributes-panel #attributes label {
-  grid-area: attr-label;
-}
-.definitelywizards .sheet-panel #attributes-panel #attributes select {
-  grid-area: attr-select;
-}
-.definitelywizards .sheet-panel #attributes-panel #attributes img {
-  grid-area: attr-roller;
-}
-.definitelywizards .sheet-panel #attributes-panel #attributes input {
-  grid-area: attr-custom;
-}
-.definitelywizards .sheet-panel #attributes-panel .attribute {
-  align-items: center;
-  display: grid;
-  gap: 10px;
-  grid-template-columns: 72px 200px 1fr;
-  grid-template-areas: "attr-label attr-select attr-roller" ". attr-custom .";
-}
-.definitelywizards .sheet-panel #bio-panel {
-  display: grid;
-  grid-template-rows: max-content 1fr;
-}
-.definitelywizards .sheet-panel #bio-panel .editor {
-  min-height: 150px;
-  max-height: 260px;
-  overflow-y: auto;
-}
-.definitelywizards .sheet-panel #class-description-panel {
-  display: grid;
-  grid-template-rows: max-content 1fr;
-  margin-right: 0.5rem;
-}
-.definitelywizards .sheet-panel #class-description-panel .class-description {
-  min-height: 50px;
-  max-height: 100px;
-  overflow-y: auto;
-  border: 0;
-  background: transparent;
-}
-.definitelywizards .sheet-panel #middle-panel {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  height: auto;
-  margin-top: 14px;
-}
-.definitelywizards .sheet-panel #items-panel .dw-item-list,
-.definitelywizards .sheet-panel #props-panel .dw-item-list,
-.definitelywizards .sheet-panel #spells-panel .dw-item-list,
-.definitelywizards .sheet-panel #items-panel .dw-prop-list,
-.definitelywizards .sheet-panel #props-panel .dw-prop-list,
-.definitelywizards .sheet-panel #spells-panel .dw-prop-list {
-  overflow-y: auto;
-  height: 175px;
-}
-.definitelywizards .sheet-panel #items-panel .dw-spell-list,
-.definitelywizards .sheet-panel #props-panel .dw-spell-list,
-.definitelywizards .sheet-panel #spells-panel .dw-spell-list {
-  overflow-y: auto;
-  height: 300px;
-}
-.definitelywizards .sheet-panel #items-panel .add-item,
-.definitelywizards .sheet-panel #props-panel .add-item,
-.definitelywizards .sheet-panel #spells-panel .add-item,
-.definitelywizards .sheet-panel #items-panel .add-spell,
-.definitelywizards .sheet-panel #props-panel .add-spell,
-.definitelywizards .sheet-panel #spells-panel .add-spell,
-.definitelywizards .sheet-panel #items-panel .add-prop,
-.definitelywizards .sheet-panel #props-panel .add-prop,
-.definitelywizards .sheet-panel #spells-panel .add-prop {
-  font-size: 0.7rem;
-  align-self: center;
-}
-.definitelywizards .sheet-panel #items-panel .add-item:hover,
-.definitelywizards .sheet-panel #props-panel .add-item:hover,
-.definitelywizards .sheet-panel #spells-panel .add-item:hover,
-.definitelywizards .sheet-panel #items-panel .add-spell:hover,
-.definitelywizards .sheet-panel #props-panel .add-spell:hover,
-.definitelywizards .sheet-panel #spells-panel .add-spell:hover,
-.definitelywizards .sheet-panel #items-panel .add-prop:hover,
-.definitelywizards .sheet-panel #props-panel .add-prop:hover,
-.definitelywizards .sheet-panel #spells-panel .add-prop:hover {
-  text-shadow: 2px 2px 4px var(--color-text-dark-5);
-  cursor: pointer;
-}
-.definitelywizards .sheet-panel #items-panel ol,
-.definitelywizards .sheet-panel #props-panel ol,
-.definitelywizards .sheet-panel #spells-panel ol {
-  list-style: none;
-  margin: 0;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  padding: 0 5px;
-}
-.definitelywizards .sheet-panel #items-panel .items-header,
-.definitelywizards .sheet-panel #props-panel .items-header,
-.definitelywizards .sheet-panel #spells-panel .items-header,
-.definitelywizards .sheet-panel #items-panel .spells-header,
-.definitelywizards .sheet-panel #props-panel .spells-header,
-.definitelywizards .sheet-panel #spells-panel .spells-header,
-.definitelywizards .sheet-panel #items-panel .props-header,
-.definitelywizards .sheet-panel #props-panel .props-header,
-.definitelywizards .sheet-panel #spells-panel .props-header {
-  border-bottom: 1px solid var(--color-border-dark-5);
-}
-.definitelywizards .sheet-panel #items-panel .items-header .item-name,
-.definitelywizards .sheet-panel #props-panel .items-header .item-name,
-.definitelywizards .sheet-panel #spells-panel .items-header .item-name,
-.definitelywizards .sheet-panel #items-panel .spells-header .item-name,
-.definitelywizards .sheet-panel #props-panel .spells-header .item-name,
-.definitelywizards .sheet-panel #spells-panel .spells-header .item-name,
-.definitelywizards .sheet-panel #items-panel .props-header .item-name,
-.definitelywizards .sheet-panel #props-panel .props-header .item-name,
-.definitelywizards .sheet-panel #spells-panel .props-header .item-name,
-.definitelywizards .sheet-panel #items-panel .items-header .spell-name,
-.definitelywizards .sheet-panel #props-panel .items-header .spell-name,
-.definitelywizards .sheet-panel #spells-panel .items-header .spell-name,
-.definitelywizards .sheet-panel #items-panel .spells-header .spell-name,
-.definitelywizards .sheet-panel #props-panel .spells-header .spell-name,
-.definitelywizards .sheet-panel #spells-panel .spells-header .spell-name,
-.definitelywizards .sheet-panel #items-panel .props-header .spell-name,
-.definitelywizards .sheet-panel #props-panel .props-header .spell-name,
-.definitelywizards .sheet-panel #spells-panel .props-header .spell-name,
-.definitelywizards .sheet-panel #items-panel .items-header .prop-name,
-.definitelywizards .sheet-panel #props-panel .items-header .prop-name,
-.definitelywizards .sheet-panel #spells-panel .items-header .prop-name,
-.definitelywizards .sheet-panel #items-panel .spells-header .prop-name,
-.definitelywizards .sheet-panel #props-panel .spells-header .prop-name,
-.definitelywizards .sheet-panel #spells-panel .spells-header .prop-name,
-.definitelywizards .sheet-panel #items-panel .props-header .prop-name,
-.definitelywizards .sheet-panel #props-panel .props-header .prop-name,
-.definitelywizards .sheet-panel #spells-panel .props-header .prop-name {
-  padding-left: 5px;
-  text-align: left;
-  border-bottom: none;
-}
-.definitelywizards .sheet-panel #items-panel .item-roll,
-.definitelywizards .sheet-panel #props-panel .item-roll,
-.definitelywizards .sheet-panel #spells-panel .item-roll,
-.definitelywizards .sheet-panel #items-panel .spell-roll,
-.definitelywizards .sheet-panel #props-panel .spell-roll,
-.definitelywizards .sheet-panel #spells-panel .spell-roll,
-.definitelywizards .sheet-panel #items-panel .prop-roll,
-.definitelywizards .sheet-panel #props-panel .prop-roll,
-.definitelywizards .sheet-panel #spells-panel .prop-roll {
-  cursor: pointer;
-}
-.definitelywizards .sheet-panel #items-panel .item-name,
-.definitelywizards .sheet-panel #props-panel .item-name,
-.definitelywizards .sheet-panel #spells-panel .item-name,
-.definitelywizards .sheet-panel #items-panel .spell-name,
-.definitelywizards .sheet-panel #props-panel .spell-name,
-.definitelywizards .sheet-panel #spells-panel .spell-name,
-.definitelywizards .sheet-panel #items-panel .prop-roll,
-.definitelywizards .sheet-panel #props-panel .prop-roll,
-.definitelywizards .sheet-panel #spells-panel .prop-roll {
-  margin: 0;
-  overflow: hidden;
-  align-items: center;
-}
-.definitelywizards .sheet-panel #items-panel .item-name .item-image,
-.definitelywizards .sheet-panel #props-panel .item-name .item-image,
-.definitelywizards .sheet-panel #spells-panel .item-name .item-image,
-.definitelywizards .sheet-panel #items-panel .spell-name .item-image,
-.definitelywizards .sheet-panel #props-panel .spell-name .item-image,
-.definitelywizards .sheet-panel #spells-panel .spell-name .item-image,
-.definitelywizards .sheet-panel #items-panel .prop-roll .item-image,
-.definitelywizards .sheet-panel #props-panel .prop-roll .item-image,
-.definitelywizards .sheet-panel #spells-panel .prop-roll .item-image,
-.definitelywizards .sheet-panel #items-panel .item-name .spell-image,
-.definitelywizards .sheet-panel #props-panel .item-name .spell-image,
-.definitelywizards .sheet-panel #spells-panel .item-name .spell-image,
-.definitelywizards .sheet-panel #items-panel .spell-name .spell-image,
-.definitelywizards .sheet-panel #props-panel .spell-name .spell-image,
-.definitelywizards .sheet-panel #spells-panel .spell-name .spell-image,
-.definitelywizards .sheet-panel #items-panel .prop-roll .spell-image,
-.definitelywizards .sheet-panel #props-panel .prop-roll .spell-image,
-.definitelywizards .sheet-panel #spells-panel .prop-roll .spell-image,
-.definitelywizards .sheet-panel #items-panel .item-name .prop-image,
-.definitelywizards .sheet-panel #props-panel .item-name .prop-image,
-.definitelywizards .sheet-panel #spells-panel .item-name .prop-image,
-.definitelywizards .sheet-panel #items-panel .spell-name .prop-image,
-.definitelywizards .sheet-panel #props-panel .spell-name .prop-image,
-.definitelywizards .sheet-panel #spells-panel .spell-name .prop-image,
-.definitelywizards .sheet-panel #items-panel .prop-roll .prop-image,
-.definitelywizards .sheet-panel #props-panel .prop-roll .prop-image,
-.definitelywizards .sheet-panel #spells-panel .prop-roll .prop-image {
-  flex: 0 0 30px;
-  height: 30px;
-  width: 30px;
-  margin: 5px;
-  background-size: cover;
-  background-position: 50% 0;
-  border: none;
-}
-.definitelywizards .sheet-panel #items-panel .item-name .item-image,
-.definitelywizards .sheet-panel #props-panel .item-name .item-image,
-.definitelywizards .sheet-panel #spells-panel .item-name .item-image,
-.definitelywizards .sheet-panel #items-panel .spell-name .item-image,
-.definitelywizards .sheet-panel #props-panel .spell-name .item-image,
-.definitelywizards .sheet-panel #spells-panel .spell-name .item-image,
-.definitelywizards .sheet-panel #items-panel .prop-roll .item-image,
-.definitelywizards .sheet-panel #props-panel .prop-roll .item-image,
-.definitelywizards .sheet-panel #spells-panel .prop-roll .item-image {
-  background-color: rgba(25, 22, 13, 0.1);
-}
-.definitelywizards .sheet-panel #items-panel .item-description,
-.definitelywizards .sheet-panel #props-panel .item-description,
-.definitelywizards .sheet-panel #spells-panel .item-description,
-.definitelywizards .sheet-panel #items-panel .spell-description,
-.definitelywizards .sheet-panel #props-panel .spell-description,
-.definitelywizards .sheet-panel #spells-panel .spell-description,
-.definitelywizards .sheet-panel #items-panel .prop-description,
-.definitelywizards .sheet-panel #props-panel .prop-description,
-.definitelywizards .sheet-panel #spells-panel .prop-description {
-  margin-right: 5px;
-}
-.definitelywizards .sheet-panel #items-panel .item-controls,
-.definitelywizards .sheet-panel #props-panel .item-controls,
-.definitelywizards .sheet-panel #spells-panel .item-controls,
-.definitelywizards .sheet-panel #items-panel .spell-controls,
-.definitelywizards .sheet-panel #props-panel .spell-controls,
-.definitelywizards .sheet-panel #spells-panel .spell-controls,
-.definitelywizards .sheet-panel #items-panel .prop-controls,
-.definitelywizards .sheet-panel #props-panel .prop-controls,
-.definitelywizards .sheet-panel #spells-panel .prop-controls {
-  flex: 0 0 68px;
-  align-items: center;
-}
-.definitelywizards .chatItem .item-image {
-  flex: 0 0 15px;
-  height: 15px;
-  width: 15px;
-  background-size: cover;
-  background-position: 50% 0;
-  border: none;
+
+.definitelywizards.item .window-content .dw-sheet-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+
+    .dw-bio-panel {
+        flex: 1;
+        display: grid;
+        grid-template-rows: max-content minmax(0, 1fr);
+        min-height: 0;
+    }
+
+    .editor {
+        min-height: 120px;
+        height: 100%;
+        overflow-y: auto;
+    }
 }

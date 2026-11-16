@@ -2,11 +2,10 @@
   "id": "definitely-wizards",
   "title": "Definitely Wizards",
   "description": "A TTRPG about not being a wizard",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "compatibility": {
-    "minimum": "11",
-    "verified": "12",
-    "maximum": "12"
+    "minimum": "14",
+    "verified": "14"
   },
   "authors": [
     {
@@ -16,14 +15,51 @@
     {
       "name": "May Keable",
       "flags": {}
+    },
+    {
+      "name": "ssandif",
+      "url": "https://github.com/ssandif",
+      "flags": {}
     }
   ],
-  "esmodules": [
-    "module/main.js"
+  "esmodules": ["module/main.js"],
+  "styles": ["styles/main.css"],
+  "primaryTokenAttribute": "stats.wizard",
+  "secondaryTokenAttribute": "stats.wild",
+  "background": "systems/definitely-wizards/resources/images/system-banner.jpg",
+  "media": [
+    {
+      "type": "setup",
+      "url": "systems/definitely-wizards/resources/images/system-banner.jpg",
+      "caption": "Definitely Wizards",
+      "loop": false,
+      "flags": {}
+    }
   ],
-  "styles": [
-    "styles/main.css"
-  ],
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "html", "hbs", "json"],
+      "paths": ["styles", "templates", "lang"]
+    }
+  },
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": ["biography", "classDescription"]
+      }
+    },
+    "Item": {
+      "Prop": {
+        "htmlFields": ["description"]
+      },
+      "Spell": {
+        "htmlFields": ["description"]
+      },
+      "MiscItem": {
+        "htmlFields": ["description"]
+      }
+    }
+  },
   "packs": [
     {
       "name": "spells",
@@ -48,6 +84,30 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "macros",
+      "label": "GM Helpers",
+      "path": "packs/definitely-wizards-macros",
+      "type": "Macro",
+      "system": "definitely-wizards",
+      "flags": {},
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "player-macros",
+      "label": "Player Macros",
+      "path": "packs/definitely-wizards-player-macros",
+      "type": "Macro",
+      "system": "definitely-wizards",
+      "flags": {},
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "languages": [
@@ -59,7 +119,7 @@
     }
   ],
   "url": "https://github.com/keab42/foundryvtt-definitelywizards",
-  "manifest": "https://raw.githubusercontent.com/keab42/foundryvtt-definitelywizards/master/system.json",
-  "download": "https://github.com/keab42/foundryvtt-definitelywizards/releases/download/v1.4.0/definitely-wizards.zip",
+  "manifest": "https://github.com/keab42/foundryvtt-definitelywizards/releases/latest/download/system.json",
+  "download": "https://github.com/keab42/foundryvtt-definitelywizards/releases/download/v2.0.0/definitely-wizards.zip",
   "license": "LICENSE.txt"
 }

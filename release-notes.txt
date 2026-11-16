@@ -25,3 +25,18 @@ v.1.3.0 25/09/2023
 
 V.1.4.0 10/10/2023
 - Updated for Foundry V12
+
+v2.0.0 15/11/2026
+Compatibility
+- Requires Foundry VTT v14 (drops Foundry v11/v12 support)
+- Rebuilt sheets, data schemas, styling, and compendium packs for Foundry v14, with automatic migration for existing characters
+
+What's New (Players & GMs)
+- Redesigned, resizable character and item sheets with rich-text editors, custom icons, a setup banner, and linked, friendly default tokens for new characters
+- Updated Wizard and Wild stat blocks with Locked and Arrested badges, plus themed chat cards showing SUCCESS/FAIL results, stat changes after the roll that triggered them, and Wit Bonus (2d6, keep lowest) dice breakdowns
+- Added starting Prop hints and one-click Add to Props on the Attributes tab, plus Costuming (+1 Wizard / -1 Wild) buttons on Props and Prop chat cards
+- New characters start with the 10 low-grade Wizard spells (with an Add Starting Spells button if any are missing), direct 1d6 and Wit cast buttons, and improvised Wild spell casting on the Spells tab
+- Automated Wizard/Wild stat-6 lockouts (resetting the locked stat to 2 on an opposite-stat success) and arrest alerts when Wild reaches 7 or the whole party reaches Wild 6 together
+- Added interactive chat buttons for Roll for Consequences, Cover (+1 Wild), Undo Cover (-1 Wild), and Couldn't Disguise (+1 Wild)
+- Updated exam RollTables and added Monster Factory tables (auto-imported on launch), plus a Generate Practical Exam macro in GM Helpers (creates a GM Journal Entry or whispered chat)
+- Added the Player Macros compendium, drag-to-hotbar support for stat rolls, Spells, Props, and Items, Shift-click Wit Bonus rolls on sheets and hotbar macros, and automatic slots 1-4 hotbar setup for new players (Auto-Populate Player Hotbar world setting)

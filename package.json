@@ -1,21 +1,35 @@
 {
   "name": "definitely-wizards",
-  "version": "1.0.0",
-  "description": "CSS compiler for the Definitely Wizards system",
+  "version": "2.0.0",
+  "description": "Definitely Wizards system for Foundry VTT v14",
+  "type": "module",
+  "private": true,
   "scripts": {
-    "css": "gulp css",
-    "watch": "gulp",
-    "gulp": "gulp"
+    "format": "biome format --write .",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "check:foundry": "node scripts/check-foundry.mjs",
+    "check": "npm run lint && npm run typecheck && npm run check:foundry",
+    "build:macros": "node scripts/build-compendiums.mjs",
+    "pack:props": "fvtt package pack -n definitely-wizards-props --type System --in packs/_source/definitely-wizards-props --out packs",
+    "pack:spells": "fvtt package pack -n definitely-wizards-spells --type System --in packs/_source/definitely-wizards-spells --out packs",
+    "build:packs": "npm run build:macros && npm run pack:props && npm run pack:spells",
+    "unpack:props": "fvtt package unpack -n definitely-wizards-props --type System --in packs --out packs/_source/definitely-wizards-props",
+    "unpack:spells": "fvtt package unpack -n definitely-wizards-spells --type System --in packs --out packs/_source/definitely-wizards-spells",
+    "prepare": "lefthook install"
   },
-  "browserslist": [
-    "last 3 versions"
-  ],
   "author": "",
   "license": "MIT",
-  "private": true,
-  "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.3.0",
-    "gulp-less": "^4.0.1"
+  "devDependencies": {
+    "@biomejs/biome": "^2.0.0",
+    "@foundryvtt/foundryvtt-cli": "^3.0.5",
+    "classic-level": "^3.0.0",
+    "lefthook": "^1.11.0",
+    "typescript": "^5.8.0"
+  },
+  "allowScripts": {
+    "classic-level@3.0.0": true,
+    "lefthook@1.13.6": true
   }
 }

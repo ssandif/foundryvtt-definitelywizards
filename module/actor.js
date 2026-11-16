@@ -1,112 +1,454 @@
+import { DEFAULT_WIZARD_SPELLS } from "./data-models.js";
+
+const CHARACTER_DEFAULT_ICON = "systems/definitely-wizards/resources/icons/wizard-character.svg";
+const PROP_DEFAULT_ICON = "systems/definitely-wizards/resources/icons/wizard-hat.svg";
+const SPELL_DEFAULT_ICON = "systems/definitely-wizards/resources/icons/magic-wand.svg";
+
 /**
- * Extend the base Actor entity by defining a custom roll data structure which is ideal for the HoneyHeist system.
- * @extends {Actor}
+ * Extend the base Actor document for the Definitely Wizards system.
  */
-
 export class DefinitelyWizardsActor extends Actor {
-    /** @override */
-    // getRollData() {
-    //  const data = super.getRollData();
-    //  return data;
-    // }
-    // /** @override */
-    // prepareData() {
-    //  super.prepareData();
-    //  const actorData = this.data;
-    // }
+    /**
+     * Provide custom default artwork for newly created characters.
+     * @override
+     * @param {Record<string, any>} actorData
+     * @returns {{ img: string, texture: { src: string } }}
+     */
+    static getDefaultArtwork(actorData) {
+        if (actorData?.type === "character") {
+            return {
+                img: CHARACTER_DEFAULT_ICON,
+                texture: { src: CHARACTER_DEFAULT_ICON },
+            };
+        }
+        return super.getDefaultArtwork(actorData);
+    }
 
+    /**
+     * Default character prototype tokens to linked, friendly, and owner-hover nameplate
+     * unless explicitly set in creation data.
+     * @override
+     * @param {Record<string, any>} data
+     * @param {Record<string, any>} options
+     * @param {any} user
+     */
+    async _preCreate(data, options, user) {
+        const allowed = await super._preCreate(data, options, user);
+        if (allowed === false) return false;
 
-    async updateStat(isWizard, offset) {
+        if (this.type !== "character") return;
 
-        let wizardStat = this.system.stats.wizard;
-        let wildStat = this.system.stats.wild;
-        let oldValue = 0;
-        let newValue = 0;
+        /** @type {Record<string, any>} */
+        const prototypeToken = {};
+        if (!foundry.utils.hasProperty(data, "prototypeToken.actorLink")) {
+            prototypeToken.actorLink = true;
+        }
+        if (!foundry.utils.hasProperty(data, "prototypeToken.disposition")) {
+            prototypeToken.disposition = CONST.TOKEN_DISPOSITIONS.FRIENDLY;
+        }
+        if (!foundry.utils.hasProperty(data, "prototypeToken.displayName")) {
+            prototypeToken.displayName = CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER;
+        }
+        if (Object.keys(prototypeToken).length > 0) {
+            this.updateSource({ prototypeToken });
+        }
+    }
 
-        // These stat values should always be numbers, but sometimes
-        // they get returned as strings and I don't know why.
-        if (typeof wizardStat === "string") {
-            wizardStat = parseInt(wizardStat);
+    /**
+     * Populate the 10 standard low-grade Wizard spells for newly created characters.
+     * @override
+     * @param {Record<string, any>} data
+     * @param {Record<string, any>} options
+     * @param {string} userId
+     */
+    _onCreate(data, options, userId) {
+        super._onCreate(data, options, userId);
+
+        if (
+            userId === game.user.id &&
+            this.type === "character" &&
+            !options.fromCompendium &&
+            !data.items?.length &&
+            this.items.size === 0
+        ) {
+            void this.populateDefaultSpells({ notify: false });
+        }
+    }
+
+    /**
+     * Add any missing low-grade Wizard spells from the compendium (or fallback list).
+     * @param {object} [options]
+     * @param {boolean} [options.notify=true]
+     * @returns {Promise<Item[]>}
+     */
+    async populateDefaultSpells({ notify = true } = {}) {
+        const existingNames = new Set(
+            this.items
+                .filter((item) => item.type === "Spell")
+                .map((item) => item.name.trim().toLowerCase()),
+        );
+
+        const missingEntries = DEFAULT_WIZARD_SPELLS.filter(
+            (entry) => !existingNames.has(entry.name.trim().toLowerCase()),
+        );
+
+        if (missingEntries.length === 0) {
+            if (notify) {
+                ui.notifications.info(game.i18n.localize("DW.NoMissingDefaultSpells"));
+            }
+            return [];
         }
 
-        if (typeof wildStat === "string") {
-            wildStat = parseInt(wildStat);
+        const pack = game.packs?.get("definitely-wizards.spells");
+        const packDocs = pack ? await pack.getDocuments() : [];
+        const packByName = new Map(packDocs.map((doc) => [doc.name.trim().toLowerCase(), doc]));
+
+        const missing = missingEntries.map((entry) => {
+            const match = packByName.get(entry.name.trim().toLowerCase());
+            if (match) {
+                const obj = match.toObject();
+                delete obj._id;
+                obj.type = "Spell";
+                obj.img = obj.img || SPELL_DEFAULT_ICON;
+                if (obj.system && "spellType" in obj.system) {
+                    delete obj.system.spellType;
+                }
+                return obj;
+            }
+            return {
+                name: entry.name,
+                type: "Spell",
+                img: SPELL_DEFAULT_ICON,
+                system: {
+                    description: entry.description,
+                    quantity: 1,
+                    weight: 0,
+                },
+            };
+        });
+
+        const created = await this.createEmbeddedDocuments("Item", missing);
+        if (notify) {
+            ui.notifications.info(
+                game.i18n.format("DW.DefaultSpellsAdded", { count: created.length }),
+            );
+        }
+        return created;
+    }
+
+    /**
+     * Add the configured starting prop (Prop 1 or Prop 2) into the actor's Props list.
+     * @param {"prop1" | "prop2"} slot
+     * @returns {Promise<Item | null>}
+     */
+    async addStartingProp(slot) {
+        const propGroup = slot === "prop1" ? "props1" : "props2";
+        const customField = slot === "prop1" ? "customProp1" : "customProp2";
+        const key = this.system[slot];
+
+        if (!key || key === "none") {
+            ui.notifications.warn(game.i18n.localize("DW.SelectPropFirst"));
+            return null;
         }
 
-        if (isWizard) {
-            oldValue = wizardStat;
-            wizardStat += offset;
-            newValue = wizardStat;
+        if (key === "custom") {
+            const customName = String(this.system[customField] ?? "").trim();
+            if (!customName) {
+                ui.notifications.warn(game.i18n.localize("DW.SelectPropFirst"));
+                return null;
+            }
+
+            const created = await this.createEmbeddedDocuments("Item", [
+                {
+                    name: customName,
+                    type: "Prop",
+                    img: PROP_DEFAULT_ICON,
+                    system: { description: "", quantity: 1, weight: 0 },
+                },
+            ]);
+            return created[0] ?? null;
+        }
+
+        const configEntry = CONFIG.DEFINITELY_WIZARDS?.[propGroup]?.[key];
+        const targetName = configEntry?.itemName || configEntry?.label || key;
+        const normalizedTarget = targetName.trim().toLowerCase();
+
+        const pack = game.packs?.get("definitely-wizards.props");
+        const packDocs = pack ? await pack.getDocuments() : [];
+        const match = packDocs.find((doc) => doc.name.trim().toLowerCase() === normalizedTarget);
+
+        /** @type {Record<string, any>} */
+        let propData;
+        if (match) {
+            propData = match.toObject();
+            delete propData._id;
+            propData.type = "Prop";
+            propData.img = propData.img || PROP_DEFAULT_ICON;
+            if (propData.system && "spellType" in propData.system) {
+                delete propData.system.spellType;
+            }
         } else {
-            oldValue = wildStat;
-            wildStat += offset;
-            newValue = wildStat;
+            const desc = configEntry?.description
+                ? `<p>${game.i18n.localize(configEntry.description)}</p>`
+                : "";
+            propData = {
+                name: targetName,
+                type: "Prop",
+                img: PROP_DEFAULT_ICON,
+                system: { description: desc, quantity: 1, weight: 0 },
+            };
         }
 
-        if (wildStat >= 0 && wildStat <= 7) {
-            // Set the new values in the sheet.
-            await this.update({ "system.stats.wizard": wizardStat });
-            await this.update({ "system.stats.wild": wildStat });
+        const created = await this.createEmbeddedDocuments("Item", [propData]);
+        return created[0] ?? null;
+    }
 
-            await this._postUpdateToChat(isWizard, oldValue, newValue);
+    /**
+     * Adjust either the Wizard or Wild stat by an offset, enforcing rules and loss conditions.
+     * @param {boolean} isWizard
+     * @param {number} offset
+     * @param {object} [options]
+     * @param {boolean} [options.suppressBothLockedAlert=false]
+     * @param {boolean} [options.silent=false]
+     * @param {string[] | null} [options.createdMessageIds=null]
+     * @returns {Promise<boolean>}
+     */
+    /**
+     * Post stat transition and milestone alert messages after a stat mutation completes.
+     * @param {boolean} isWizard
+     * @param {number} oldValue
+     * @param {number} newValue
+     * @param {object} [options]
+     * @param {number} [options.otherStat=0]
+     * @param {boolean} [options.suppressBothLockedAlert=false]
+     * @param {string[] | null} [options.createdMessageIds=null]
+     * @returns {Promise<void>}
+     */
+    async _postStatTransitionMessages(
+        isWizard,
+        oldValue,
+        newValue,
+        { otherStat = 0, suppressBothLockedAlert = false, createdMessageIds = null } = {},
+    ) {
+        /** @param {ChatMessage | undefined} msg */
+        const recordMsg = (msg) => {
+            if (msg?.id && createdMessageIds) {
+                createdMessageIds.push(msg.id);
+            }
+        };
 
-            // Check to see if either the bear or criminal stat has reached 6,
-            // which means it's the end for this bear.
-            if (wildStat >= 7) {
-                ChatMessage.create({
-                    user: game.user.id,  // avoid deprecation warning, backwards compatible
-                    speaker: ChatMessage.getSpeaker({ actor: this }),
-                    content: game.i18n.localize("DW.EndGame")
-                });
+        recordMsg(await this._postUpdateToChat(isWizard, oldValue, newValue));
+
+        if (!isWizard && newValue >= 7) {
+            recordMsg(await this._postAlertToChat("DW.EndGame", "dw-wild-card"));
+        } else if (oldValue < 6 && newValue === 6) {
+            if (otherStat === 6 && !suppressBothLockedAlert) {
+                recordMsg(await this._postAlertToChat("DW.BothStatsReachedSix"));
+            } else if (isWizard) {
+                recordMsg(await this._postAlertToChat("DW.WizardReachedSix", "dw-wizard-card"));
+            } else {
+                recordMsg(await this._postAlertToChat("DW.WildReachedSix", "dw-wild-card"));
+            }
+            if (!isWizard) {
+                recordMsg(await this._checkPartyWildArrest());
             }
         }
     }
 
-    async resetStat(isWizard) {
-        let wizardStat = this.system.stats.wizard;
-        let wildStat = this.system.stats.wild;
-        let oldValue = 0;
-        let newValue = 0;
+    async updateStat(
+        isWizard,
+        offset,
+        { suppressBothLockedAlert = false, silent = false, createdMessageIds = null } = {},
+    ) {
+        const oldValue = Number(isWizard ? this.system.stats.wizard : this.system.stats.wild);
+        const max = isWizard ? 6 : 7;
+        const newValue = Math.min(max, Math.max(0, oldValue + offset));
 
-        if (typeof wizardStat === "string") {
-            wizardStat = parseInt(wizardStat);
+        if (newValue === oldValue) {
+            return false;
         }
 
-        if (typeof wildStat === "string") {
-            wildStat = parseInt(wildStat);
-        }
+        const otherStat = Number(isWizard ? this.system.stats.wild : this.system.stats.wizard);
+        const fieldPath = isWizard ? "system.stats.wizard" : "system.stats.wild";
+        await this.update({ [fieldPath]: newValue });
+        if (silent) return true;
 
-        if (isWizard) {
-            oldValue = wizardStat;
-            wizardStat = 2;
-            newValue = wizardStat;
-        } else {
-            oldValue = wildStat;
-            wildStat = 2;
-            newValue = wildStat;
-        }
+        await this._postStatTransitionMessages(isWizard, oldValue, newValue, {
+            otherStat,
+            suppressBothLockedAlert,
+            createdMessageIds,
+        });
 
-        await this.update({ "system.stats.wizard": wizardStat });
-        await this.update({ "system.stats.wild": wildStat });
-
-        await this._postUpdateToChat(isWizard, oldValue, newValue);
+        return true;
     }
 
+    /**
+     * Reset either the Wizard or Wild stat back to 2.
+     * @param {boolean} isWizard
+     */
+    async resetStat(isWizard) {
+        const oldValue = Number(isWizard ? this.system.stats.wizard : this.system.stats.wild);
+        const fieldPath = isWizard ? "system.stats.wizard" : "system.stats.wild";
+
+        await this.update({ [fieldPath]: 2 });
+        await this._postUpdateToChat(isWizard, oldValue, 2);
+    }
+
+    /**
+     * Apply Costuming from utilizing a Prop (+1 Wizard or -1 Wild).
+     * @param {boolean} isWizard
+     * @param {string} propName
+     * @returns {Promise<boolean>}
+     */
+    async applyCostuming(isWizard, propName) {
+        const currentWizard = Number(this.system.stats.wizard);
+        const currentWild = Number(this.system.stats.wild);
+
+        if (currentWild >= 7) {
+            ui.notifications.warn(game.i18n.localize("DW.AlreadyArrestedWarning"));
+            return false;
+        }
+        if (isWizard && currentWizard >= 6) {
+            ui.notifications.warn(game.i18n.localize("DW.CostumingWizardAlreadyMax"));
+            return false;
+        }
+        if (!isWizard && currentWild <= 0) {
+            ui.notifications.warn(game.i18n.localize("DW.CostumingWildAlreadyMin"));
+            return false;
+        }
+
+        const oldValue = isWizard ? currentWizard : currentWild;
+        const otherStat = isWizard ? currentWild : currentWizard;
+        const newValue = isWizard ? currentWizard + 1 : currentWild - 1;
+        const changed = await this.updateStat(isWizard, isWizard ? 1 : -1, { silent: true });
+        if (!changed) return false;
+
+        const key = isWizard ? "DW.CostumingMessageWizard" : "DW.CostumingMessageWild";
+        const safeActor = foundry.utils.escapeHTML(this.name);
+        const safeProp = foundry.utils.escapeHTML(propName);
+
+        const cardVariantClass = isWizard ? "dw-wizard-card" : "dw-wild-card";
+
+        await ChatMessage.create({
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content: `<div class="definitelywizards chat-card ${cardVariantClass}"><p>${game.i18n.format(
+                key,
+                {
+                    actor: safeActor,
+                    prop: safeProp,
+                },
+            )}</p></div>`,
+        });
+
+        await this._postStatTransitionMessages(isWizard, oldValue, newValue, { otherStat });
+
+        return true;
+    }
+
+    /**
+     * Check whether the entire party has reached Wild = 6 simultaneously.
+     */
+    async _checkPartyWildArrest() {
+        const assignedByUuid = new Map();
+        for (const user of game.users.filter((u) => !u.isGM && Boolean(u.character))) {
+            const char = user.character;
+            if (char?.type === "character") {
+                assignedByUuid.set(char.uuid, char);
+            }
+        }
+
+        const tokenCollection =
+            (this.isToken ? this.parent?.parent?.tokens : null) ??
+            (canvas?.tokens?.placeables?.length
+                ? canvas.tokens.placeables
+                : (game.scenes?.active?.tokens ?? game.scenes?.current?.tokens ?? []));
+        const sceneByUuid = new Map();
+        for (const token of tokenCollection) {
+            const tokenActor = token?.actor;
+            if (tokenActor?.type === "character" && tokenActor.hasPlayerOwner) {
+                sceneByUuid.set(tokenActor.uuid, tokenActor);
+            }
+        }
+
+        const assignedParty = Array.from(assignedByUuid.values());
+        const sceneParty = Array.from(sceneByUuid.values());
+        const playerOwned = game.actors.filter((a) => a.type === "character" && a.hasPlayerOwner);
+        const allCharacters = game.actors.filter((a) => a.type === "character");
+
+        /** @type {Actor[]} */
+        let party = [];
+        if (
+            assignedParty.length >= 2 &&
+            assignedByUuid.has(this.uuid) &&
+            !sceneParty.some((actor) => actor.isToken)
+        ) {
+            party = assignedParty;
+        } else if (sceneParty.length >= 2 && sceneByUuid.has(this.uuid)) {
+            party = sceneParty;
+        } else if (assignedParty.length >= 2) {
+            party = assignedParty;
+        } else if (sceneParty.length >= 2) {
+            party = sceneParty;
+        } else if (playerOwned.length >= 2) {
+            party = playerOwned;
+        } else if (
+            assignedParty.length === 0 &&
+            sceneParty.length === 0 &&
+            playerOwned.length === 0 &&
+            allCharacters.length >= 2
+        ) {
+            party = allCharacters;
+        }
+
+        if (
+            party.length >= 2 &&
+            party.some((actor) => actor.uuid === this.uuid) &&
+            party.every((actor) => Number(actor.system?.stats?.wild) >= 6)
+        ) {
+            return this._postAlertToChat("DW.PartyEndGame", "dw-wild-card");
+        }
+        return undefined;
+    }
+
+    /**
+     * Post a styled rule alert card to chat.
+     * @param {string} localizationKey
+     * @param {string} [cardVariantClass=""]
+     * @returns {Promise<ChatMessage | undefined>}
+     */
+    async _postAlertToChat(localizationKey, cardVariantClass = "") {
+        const classAttr = cardVariantClass
+            ? `definitelywizards chat-card ${cardVariantClass}`
+            : "definitelywizards chat-card";
+        return ChatMessage.create({
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content: `<div class="${classAttr}"><p><strong>${game.i18n.localize(localizationKey)}</strong></p></div>`,
+        });
+    }
+
+    /**
+     * Post a stat change card to the chat log.
+     * @param {boolean} isWizard
+     * @param {number} oldValue
+     * @param {number} newValue
+     * @returns {Promise<ChatMessage | undefined>}
+     */
     async _postUpdateToChat(isWizard, oldValue, newValue) {
         const template = "systems/definitely-wizards/templates/chat/actor-stat-update-chat.hbs";
-
-        let templateData = {
+        const templateData = {
             isWizardRoll: isWizard,
-            oldValue: oldValue,
-            newValue: newValue,
-            owner: this.id
+            oldValue,
+            newValue,
+            owner: this.id,
         };
 
-        ChatMessage.create({
+        return ChatMessage.create({
             user: game.user.id,
-            speaker: ChatMessage.getSpeaker({actor: this}),
-            content: await renderTemplate(template, templateData),
-            style: CONST.CHAT_MESSAGE_STYLES.OOC
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            content: await foundry.applications.handlebars.renderTemplate(template, templateData),
+            style: CONST.CHAT_MESSAGE_STYLES.OOC,
         });
     }
 }
