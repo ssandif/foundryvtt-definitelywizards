@@ -28,19 +28,15 @@ V.1.4.0 10/10/2023
 
 v2.0.0 15/11/2026
 Compatibility
-- Requires Foundry VTT v14 (compatibility minimum/verified 14)
+- Requires Foundry VTT v14 (drops Foundry v11/v12 support)
+- Rebuilt sheets, data schemas, styling, and compendium packs for Foundry v14, with automatic migration for existing characters
 
 What's New (Players & GMs)
-- Redesigned character and item sheets with resizable windows, rich-text editors, custom actor/item/macro artwork, Wizard/Wild-themed stat cards with Lockout/Arrest badges, and friendly linked default tokens
-- Added starting Prop hints and one-click Add to Props on Attributes, Costuming (+1 Wizard / -1 Wild) buttons on Props and chat cards, and automatic 10 starting Wizard Spells (+ Add Starting Spells), direct 1d6/Wit cast buttons, and improvised Wild Spell casting
-- Enforced Wizard/Wild stat-6 lockouts with automatic opposite-stat reset to 2 on success, plus arrest alerts at Wild > 6 or when the whole party reaches Wild = 6 simultaneously
-- Upgraded chat cards with Wizard/Wild styling, SUCCESS/FAIL outcomes, Cover (+1 Wild), Undo Cover, Couldn't Disguise (+1 Wild), Consequences rolling, Wit Bonus (2d6kl) dice breakdowns, and post-action stat transition ordering
-- Updated exam RollTables and added MonsterFactoryCreature/MonsterFactoryTrait tables plus an interactive Practical Exam generator (GM journal entry or whispered chat)
-- Added GM Helpers and Player Macros compendiums, drag-to-hotbar support for stat rolls/Spells/Props/Items, Shift-click Wit Bonus casting, and automatic slot 1-4 player hotbar seeding (autoPopulateHotbar world setting)
-
-Under the Hood (Code & Tooling)
-- Migrated sheets from legacy AppV1 to ApplicationV2 (ActorSheetV2 & ItemSheetV2) with ProseMirror editors and Foundry hot-reload/setup metadata
-- Replaced template.json with TypeDataModel schemas (CharacterDataModel & DefinitelyWizardsItemDataModel) and legacy field migration
-- Replaced direct HTML chat mutations with event-sourced ChatMessage flags (resolvedMessageId) and modularized dice/macro helpers
-- Replaced Less & Gulp with native CSS scoped to .definitelywizards sheets and chat cards
-- Switched compendiums to tracked JSON sources (packs/_source/) with automated LevelDB builds (@foundryvtt/foundryvtt-cli & classic-level), Biome linting, TypeScript (checkJs) typechecking, Lefthook pre-commit hooks, and GitHub Actions CI/Release workflows
+- Redesigned, resizable character and item sheets with rich-text editors, custom icons, a setup banner, and linked, friendly default tokens for new characters
+- Updated Wizard and Wild stat blocks with Locked and Arrested badges, plus themed chat cards showing SUCCESS/FAIL results, stat changes after the roll that triggered them, and Wit Bonus (2d6, keep lowest) dice breakdowns
+- Added starting Prop hints and one-click Add to Props on the Attributes tab, plus Costuming (+1 Wizard / -1 Wild) buttons on Props and Prop chat cards
+- New characters start with the 10 low-grade Wizard spells (with an Add Starting Spells button if any are missing), direct 1d6 and Wit cast buttons, and improvised Wild spell casting on the Spells tab
+- Automated Wizard/Wild stat-6 lockouts (resetting the locked stat to 2 on an opposite-stat success) and arrest alerts when Wild reaches 7 or the whole party reaches Wild 6 together
+- Added interactive chat buttons for Roll for Consequences, Cover (+1 Wild), Undo Cover (-1 Wild), and Couldn't Disguise (+1 Wild)
+- Updated exam RollTables and added Monster Factory tables (auto-imported on launch), plus a Generate Practical Exam macro in GM Helpers (creates a GM Journal Entry or whispered chat)
+- Added the Player Macros compendium, drag-to-hotbar support for stat rolls, Spells, Props, and Items, Shift-click Wit Bonus rolls on sheets and hotbar macros, and automatic slots 1-4 hotbar setup for new players (Auto-Populate Player Hotbar world setting)
