@@ -27,15 +27,20 @@ V.1.4.0 10/10/2023
 - Updated for Foundry V12
 
 v2.0.0 15/11/2026
-- Updated for Foundry VTT v14 (compatibility minimum/verified 14)
-- Migrated Actor and Item sheets to ApplicationV2 (ActorSheetV2 & ItemSheetV2) with ProseMirror rich text editors, enriched item descriptions, resizable windows, custom character/Prop/Spell/MiscItem artwork, Wizard/Wild-themed stat cards and chat styling, linked friendly prototype token defaults (`stats.wizard`/`stats.wild` bars), and Foundry hot-reload & setup banner metadata
-- Replaced template.json with TypeDataModel classes (CharacterDataModel & DefinitelyWizardsItemDataModel) and legacy field migration
-- Enforced Wizard/Wild stat-6 lockouts and automatic opposite-stat reset to 2 on success, plus arrest alerts at Wild > 6 or when the entire party reaches Wild = 6 simultaneously
-- Upgraded chat resolution to event-sourced ChatMessage flags (resolvedMessageId) with Cover (+1 Wild), Couldn't Disguise (+1 Wild), Consequences rolling, and Wit Bonus (2d6kl) dice breakdown
-- Added starting Prop descriptions/hints and one-click Add to Props on the Attributes tab, plus Costuming (+1 Wizard / -1 Wild) buttons on Props and item chat cards
-- Auto-populated the 10 low-grade Wizard spells on new characters (plus Add Starting Spells), direct 1d6/Wit cast buttons, and improvised Wild Spell rolling on the Spells tab
-- Updated exam RollTables to Foundry v14 BaseTableResult schema and added MonsterFactoryCreature and MonsterFactoryTrait RollTables
-- Added interactive Practical Exam generator (game.definitelyWizards.generatePracticalExam) outputting to a GM Journal Entry or GM whisper in chat
-- Added GM Helpers (Generate Practical Exam macro) and Player Macros (Wizard/Wild 1d6 and Wit Bonus macros) LevelDB compendiums, drag-to-hotbar support for stat rolls, Spells, and Props/Items, and automatic slot 1-4 hotbar seeding for new/empty players (`autoPopulateHotbar` world setting)
-- Replaced Less & Gulp build pipeline with native CSS scoped to .definitelywizards sheets and chat cards
-- Added Biome, TypeScript (checkJs), Lefthook, GitHub Actions CI/Release workflows, and Foundry v14 verification and compendium build scripts
+Compatibility
+- Requires Foundry VTT v14 (compatibility minimum/verified 14)
+
+What's New (Players & GMs)
+- Redesigned character and item sheets with resizable windows, rich-text editors, custom actor/item/macro artwork, Wizard/Wild-themed stat cards with Lockout/Arrest badges, and friendly linked default tokens
+- Added starting Prop hints and one-click Add to Props on Attributes, Costuming (+1 Wizard / -1 Wild) buttons on Props and chat cards, and automatic 10 starting Wizard Spells (+ Add Starting Spells), direct 1d6/Wit cast buttons, and improvised Wild Spell casting
+- Enforced Wizard/Wild stat-6 lockouts with automatic opposite-stat reset to 2 on success, plus arrest alerts at Wild > 6 or when the whole party reaches Wild = 6 simultaneously
+- Upgraded chat cards with Wizard/Wild styling, SUCCESS/FAIL outcomes, Cover (+1 Wild), Undo Cover, Couldn't Disguise (+1 Wild), Consequences rolling, Wit Bonus (2d6kl) dice breakdowns, and post-action stat transition ordering
+- Updated exam RollTables and added MonsterFactoryCreature/MonsterFactoryTrait tables plus an interactive Practical Exam generator (GM journal entry or whispered chat)
+- Added GM Helpers and Player Macros compendiums, drag-to-hotbar support for stat rolls/Spells/Props/Items, Shift-click Wit Bonus casting, and automatic slot 1-4 player hotbar seeding (autoPopulateHotbar world setting)
+
+Under the Hood (Code & Tooling)
+- Migrated sheets from legacy AppV1 to ApplicationV2 (ActorSheetV2 & ItemSheetV2) with ProseMirror editors and Foundry hot-reload/setup metadata
+- Replaced template.json with TypeDataModel schemas (CharacterDataModel & DefinitelyWizardsItemDataModel) and legacy field migration
+- Replaced direct HTML chat mutations with event-sourced ChatMessage flags (resolvedMessageId) and modularized dice/macro helpers
+- Replaced Less & Gulp with native CSS scoped to .definitelywizards sheets and chat cards
+- Switched compendiums to tracked JSON sources (packs/_source/) with automated LevelDB builds (@foundryvtt/foundryvtt-cli & classic-level), Biome linting, TypeScript (checkJs) typechecking, Lefthook pre-commit hooks, and GitHub Actions CI/Release workflows
